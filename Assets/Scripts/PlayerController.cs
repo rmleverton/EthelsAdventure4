@@ -133,11 +133,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("CookingPot"))
+    //    {
+    //        nearbyPot = other.GetComponent<CookingPotBehaviour>();
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("CookingPot"))
+    //    {
+    //        nearbyPot = null;
+    //    }
+    //}
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("CookingPot"))
         {
             nearbyPot = other.GetComponent<CookingPotBehaviour>();
+        }
+        else if (other.CompareTag("Chest"))
+        {
+            nearbyChest = other.GetComponent<Chest_Behavior>();
         }
     }
 
@@ -147,7 +166,12 @@ public class PlayerController : MonoBehaviour
         {
             nearbyPot = null;
         }
+        else if (other.CompareTag("Chest"))
+        {
+            nearbyChest = null;
+        }
     }
+
 
     private void InteractWithChest()
     {
