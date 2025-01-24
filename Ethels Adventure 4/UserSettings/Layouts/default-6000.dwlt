@@ -326,8 +326,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 223
-    y: 89
+    x: 224
+    y: 24
     width: 358
     height: 393.5
   m_SerializedDataModeController:
@@ -882,7 +882,7 @@ MonoBehaviour:
       m_Fade:
         m_Target: 0
         speed: 2
-        m_Value: 1
+        m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 89
+    y: 24
     width: 222
     height: 393.5
   m_SerializedDataModeController:
@@ -1014,8 +1014,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Game\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 583
-    y: 89
+    x: 584
+    y: 24
     width: 473
     height: 393.5
   m_SerializedDataModeController:
@@ -1087,7 +1087,7 @@ MonoBehaviour:
       height: 756.0254
     m_MinimalGUI: 1
   m_defaultScale: 0.49270833
-  m_LastWindowPixelSize: {x: 946, y: 787}
+  m_LastWindowPixelSize: {x: 473, y: 393.5}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -1269,7 +1269,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 508.5
+    y: 443.5
     width: 1057
     height: 275.5
   m_SerializedDataModeController:
@@ -1304,8 +1304,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1058
-    y: 89
+    x: 1059
+    y: 24
     width: 305
     height: 695
   m_SerializedDataModeController:
