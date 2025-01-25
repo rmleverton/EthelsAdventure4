@@ -1,71 +1,14 @@
-//using UnityEngine;
-
-//public class Chest_Behavior : MonoBehaviour
-//{
-//    public string item = "Gold Coin"; // The item contained in the chest
-//    private bool hasItem = true; // Whether the chest has an item
-
-//    private Renderer chestRenderer;
-//    private Color defaultColor = new Color(0.59f, 0.29f, 0.0f); // Brown color
-//    private Color highlightColor = Color.red; // Red color when a player is near
-
-//    void Start()
-//    {
-//        chestRenderer = GetComponent<Renderer>();
-//        if (chestRenderer != null)
-//        {
-//            chestRenderer.material.color = defaultColor;
-//        }
-//    }
-
-//    private void OnTriggerEnter(Collider other)
-//    {
-//        if (other.CompareTag("Player"))
-//        {
-//            SetChestColor(highlightColor);
-//        }
-//    }
-
-//    private void OnTriggerExit(Collider other)
-//    {
-//        if (other.CompareTag("Player"))
-//        {
-//            SetChestColor(defaultColor);
-//        }
-//    }
-
-//    public string TakeItem()
-//    {
-//        if (hasItem)
-//        {
-//            hasItem = false;
-//            Debug.Log($"Item {item} taken from chest.");
-//            return item;
-//        }
-//        else
-//        {
-//            Debug.Log("Chest is empty!");
-//            return "";
-//        }
-//    }
-
-//    private void SetChestColor(Color color)
-//    {
-//        if (chestRenderer != null)
-//        {
-//            chestRenderer.material.color = color;
-//        }
-//    }
-//}
-
 using UnityEngine;
 
-public class Chest_Behavior : MonoBehaviour
+public class ChestBehavior : MonoBehaviour
 {
-    public string item; // The unique item contained in this chest
+    //public string item; // The unique item contained in this chest
     private Renderer chestRenderer;
     private Color defaultColor = new Color(0.39f, 0.19f, 0.0f); // Brown color
     private Color highlightColor = Color.red; // Red color when a player is near
+
+    public Item itemInChest; // The item stored in this chest
+    public GameObject itemPrefab; // Prefab for the item GameObject
 
     void Start()
     {
@@ -92,11 +35,7 @@ public class Chest_Behavior : MonoBehaviour
         }
     }
 
-    public string GetItem()
-    {
-        Debug.Log($"Item {item} taken from chest.");
-        return item; // The item is always available (unlimited)
-    }
+    
 
     private void SetChestColor(Color color)
     {
@@ -105,4 +44,41 @@ public class Chest_Behavior : MonoBehaviour
             chestRenderer.material.color = color;
         }
     }
+
+    
+    public GameObject CreateItem()
+    {
+        if (itemPrefab == null)
+        {
+            Debug.LogWarning("Item prefab is missing in Chest_Behavior.");
+            return null;
+        }
+
+        if (itemInChest == null)
+        {
+            Debug.LogWarning("Item data is missing in Chest_Behavior.");
+            return null;
+        }
+
+        // Instantiate the item
+        GameObject newItem = Instantiate(itemPrefab, transform.position, Quaternion.identity);
+
+        // Get the ItemInstance component
+        ItemInstance itemInstance = newItem.GetComponent<ItemInstance>();
+
+        if (itemInstance != null)
+        {
+            // Assign the item data and set the GameObject's name
+            itemInstance.itemData = itemInChest;
+            newItem.name = itemInChest.itemName; // Set the name of the GameObject
+            Debug.Log($"Created item: {itemInstance.GetItemName()}");
+        }
+        else
+        {
+            Debug.LogWarning("ItemInstance script is missing on the itemPrefab.");
+        }
+
+        return newItem;
+    }
+
 }
