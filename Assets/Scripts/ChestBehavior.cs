@@ -37,7 +37,7 @@ public class ChestBehavior : MonoBehaviour
             Debug.LogWarning("UI menu is not assigned in the ChestPrompt script.");
         }
 
-        panelText = uiPanel.transform.Find("Text").GetComponent<TMP_Text>();
+        //panelText = uiPanel.transform.Find("Text").GetComponent<TMP_Text>();
     }
 
     private void OnTriggerEnter(Collider other)
