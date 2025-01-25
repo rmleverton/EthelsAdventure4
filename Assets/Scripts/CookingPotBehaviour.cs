@@ -299,8 +299,10 @@ public class CookingPotBehaviour : MonoBehaviour
         if (itemInstance == null) return false;
 
         itemsInPot.Add(itemInstance);
-        Debug.Log($"Item {itemInstance.itemData.itemName} added to the pot.");
+        var itemName = itemInstance.itemData.itemName;
+        Debug.Log($"Item {itemName} added to the pot.");
         UpdatePotColor();
+        AddIngredientToUI(itemName); //ADD THE INGREDIENT TO THE UI CAMPFIRE UI PANEL. 
 
         if (itemsInPot.Count == maxSlots)
         {
@@ -414,6 +416,11 @@ public class CookingPotBehaviour : MonoBehaviour
         {
             ResetPotColor();
         }
+    }
+
+    private void AddIngredientToUI(string item)
+    {
+        Debug.Log($"Added {item} to ingredient list UI.");
     }
 }
 
