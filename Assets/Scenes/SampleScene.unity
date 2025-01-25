@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 33080632}
   - component: {fileID: 33080635}
   - component: {fileID: 33080634}
-  - component: {fileID: 33080633}
   m_Layer: 0
   m_Name: SleepingSpotTile
   m_TagString: Untagged
@@ -153,28 +152,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1275859369}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!64 &33080633
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 33080631}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &33080634
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -830,7 +807,7 @@ Transform:
   m_GameObject: {fileID: 114631138}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.3420201, z: -0, w: 0.9396927}
-  m_LocalPosition: {x: 6.199392, y: -1.1990274, z: -0.52587223}
+  m_LocalPosition: {x: 6.199392, y: 0.55, z: -0.52587223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1327,7 +1304,7 @@ Transform:
   m_GameObject: {fileID: 321028185}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.199392, y: -1.1990274, z: -0.52587223}
+  m_LocalPosition: {x: 6.199392, y: 0.55, z: -0.52587223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2308,7 +2285,6 @@ GameObject:
   - component: {fileID: 479863915}
   - component: {fileID: 479863918}
   - component: {fileID: 479863917}
-  - component: {fileID: 479863916}
   m_Layer: 0
   m_Name: SleepingSpotTile
   m_TagString: Untagged
@@ -2331,28 +2307,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1866448305}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!64 &479863916
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479863914}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &479863917
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2749,7 +2703,7 @@ Transform:
   m_GameObject: {fileID: 622231674}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.6427877, z: -0, w: -0.7660444}
-  m_LocalPosition: {x: 6.199392, y: -1.1990274, z: -0.52587223}
+  m_LocalPosition: {x: 6.199392, y: 0.55, z: -0.52587223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4312,6 +4266,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960312425}
   m_CullTransparentMesh: 1
+--- !u!1 &961753452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 961753453}
+  m_Layer: 0
+  m_Name: Way Point N
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &961753453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961753452}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.21, y: 0.55, z: 2.06}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1196120107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -4580,7 +4565,7 @@ Transform:
   m_GameObject: {fileID: 970159288}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.34202027, z: -0, w: -0.9396926}
-  m_LocalPosition: {x: 6.199392, y: -1.1990274, z: -0.52587223}
+  m_LocalPosition: {x: 6.199392, y: 0.55, z: -0.52587223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4900,7 +4885,6 @@ GameObject:
   - component: {fileID: 1057965890}
   - component: {fileID: 1057965893}
   - component: {fileID: 1057965892}
-  - component: {fileID: 1057965891}
   m_Layer: 0
   m_Name: SleepingSpotTile
   m_TagString: Untagged
@@ -4923,28 +4907,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 114631139}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!64 &1057965891
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1057965889}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1057965892
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5218,7 +5180,6 @@ GameObject:
   - component: {fileID: 1181521985}
   - component: {fileID: 1181521988}
   - component: {fileID: 1181521987}
-  - component: {fileID: 1181521986}
   m_Layer: 0
   m_Name: SleepingSpotTile
   m_TagString: Untagged
@@ -5241,28 +5202,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 970159289}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!64 &1181521986
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181521984}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1181521987
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5348,16 +5287,18 @@ MonoBehaviour:
   catPrefab: {fileID: 8850238511774426417, guid: b091dba95ebb84c62977f57a92d65938, type: 3}
   spawnPoint: {fileID: 921658013}
   testPoint: {fileID: 1716988411}
+  wayPointN: {fileID: 961753453}
+  wayPointS: {fileID: 1622043366}
   sleepPoints:
-  - {fileID: 321028186}
-  - {fileID: 114631139}
-  - {fileID: 970159289}
-  - {fileID: 1275859369}
-  - {fileID: 622231675}
-  - {fileID: 1557888565}
-  - {fileID: 1485637431}
-  - {fileID: 1866448305}
-  - {fileID: 1795514502}
+  - {fileID: 1421094520}
+  - {fileID: 1057965890}
+  - {fileID: 1181521985}
+  - {fileID: 33080632}
+  - {fileID: 2052708978}
+  - {fileID: 1582101997}
+  - {fileID: 2055289600}
+  - {fileID: 479863915}
+  - {fileID: 1606137287}
   illnesses:
   - Mange
   - Catatonia
@@ -5413,6 +5354,8 @@ Transform:
   m_Children:
   - {fileID: 921658013}
   - {fileID: 1716988411}
+  - {fileID: 961753453}
+  - {fileID: 1622043366}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1275859368
@@ -5440,7 +5383,7 @@ Transform:
   m_GameObject: {fileID: 1275859368}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.6427876, z: -0, w: 0.7660445}
-  m_LocalPosition: {x: 6.199392, y: -1.1990274, z: -0.52587223}
+  m_LocalPosition: {x: 6.199392, y: 0.55, z: -0.52587223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5853,7 +5796,6 @@ GameObject:
   - component: {fileID: 1421094520}
   - component: {fileID: 1421094523}
   - component: {fileID: 1421094522}
-  - component: {fileID: 1421094521}
   m_Layer: 0
   m_Name: SleepingSpotTile
   m_TagString: Untagged
@@ -5876,28 +5818,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 321028186}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!64 &1421094521
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1421094519}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1421094522
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6085,7 +6005,7 @@ Transform:
   m_GameObject: {fileID: 1485637430}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.8660254, z: -0, w: -0.5}
-  m_LocalPosition: {x: 6.199392, y: -1.1990274, z: -0.52587223}
+  m_LocalPosition: {x: 6.199392, y: 0.55, z: -0.52587223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6117,7 +6037,7 @@ Transform:
   m_GameObject: {fileID: 1557888564}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.86602545, z: -0, w: 0.49999994}
-  m_LocalPosition: {x: 6.199392, y: -1.1990274, z: -0.52587223}
+  m_LocalPosition: {x: 6.199392, y: 0.55, z: -0.52587223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6244,7 +6164,6 @@ GameObject:
   - component: {fileID: 1582101997}
   - component: {fileID: 1582102000}
   - component: {fileID: 1582101999}
-  - component: {fileID: 1582101998}
   m_Layer: 0
   m_Name: SleepingSpotTile
   m_TagString: Untagged
@@ -6267,28 +6186,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1557888565}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!64 &1582101998
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582101996}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1582101999
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6461,7 +6358,6 @@ GameObject:
   - component: {fileID: 1606137287}
   - component: {fileID: 1606137290}
   - component: {fileID: 1606137289}
-  - component: {fileID: 1606137288}
   m_Layer: 0
   m_Name: SleepingSpotTile
   m_TagString: Untagged
@@ -6484,28 +6380,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1795514502}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!64 &1606137288
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606137286}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1606137289
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6667,6 +6541,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1980170310}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1622043365
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1622043366}
+  m_Layer: 0
+  m_Name: Way Point S
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1622043366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622043365}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.21000004, y: 0.55, z: -2.38}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1196120107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1659226418
 GameObject:
   m_ObjectHideFlags: 0
@@ -7405,7 +7310,7 @@ Transform:
   m_GameObject: {fileID: 1795514501}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.9848078, z: -0, w: -0.17364809}
-  m_LocalPosition: {x: 6.199392, y: -1.1990274, z: -0.52587223}
+  m_LocalPosition: {x: 6.199392, y: 0.55, z: -0.52587223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7526,7 +7431,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -7714,7 +7619,7 @@ Transform:
   m_GameObject: {fileID: 1866448304}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9848078, z: -0, w: 0.17364825}
-  m_LocalPosition: {x: 6.199392, y: -1.1990274, z: -0.52587223}
+  m_LocalPosition: {x: 6.199392, y: 0.55, z: -0.52587223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8540,7 +8445,6 @@ GameObject:
   - component: {fileID: 2052708978}
   - component: {fileID: 2052708981}
   - component: {fileID: 2052708980}
-  - component: {fileID: 2052708979}
   m_Layer: 0
   m_Name: SleepingSpotTile
   m_TagString: Untagged
@@ -8563,28 +8467,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 622231675}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!64 &2052708979
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2052708977}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &2052708980
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8649,7 +8531,6 @@ GameObject:
   - component: {fileID: 2055289600}
   - component: {fileID: 2055289603}
   - component: {fileID: 2055289602}
-  - component: {fileID: 2055289601}
   m_Layer: 0
   m_Name: SleepingSpotTile
   m_TagString: Untagged
@@ -8672,28 +8553,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1485637431}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!64 &2055289601
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2055289599}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &2055289602
 MeshRenderer:
   m_ObjectHideFlags: 0
