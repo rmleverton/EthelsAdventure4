@@ -1,0 +1,14 @@
+# Exported from Nomad Sculpt
+
+newmtl Plane_1
+ map_Kd -o 0.288136 0.292690 0.000000 -s 0.646858 0.646858 1.000000 IMG_4821.png
+ Kd 0.905150 0.352308 0.856922
+ Pr 0.250000
+ Pm 0.000000
+
+newmtl Torus
+ map_Kd IMG_4819.png
+ map_roughness IMG_4818.png
+ Kd 1.000000 1.000000 1.000000
+ Pr 0.250000
+ Pm 0.000000
