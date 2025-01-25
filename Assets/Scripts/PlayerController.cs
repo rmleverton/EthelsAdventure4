@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     private Animator anim;
 
+    private Cat nearbyCat;
+
     private void Start()
     {
         ConfigureInputActions();
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
         Vector2 moveValue = moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
         transform.position += new Vector3(moveValue.x, 0, moveValue.y) * speed * Time.deltaTime;
 
+
         //anim.SetFloat("speedX", moveValue.x);
         //anim.SetFloat("speedY", moveValue.y);
     }
@@ -73,6 +76,10 @@ public class PlayerController : MonoBehaviour
         else if (nearbyChest != null)
         {
             InteractWithChest();
+        }
+        if (nearbyCat != null && nearbyCat.CanBeFed)
+        {
+            HandleCatFeeding();
         }
     }
 
@@ -110,6 +117,34 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log($"{gameObject.tag} tried to pick up cooked food, but no food is available.");
             }
+        }
+    }
+
+    private void HandleCatFeeding()
+    {
+        // Check if player has cooked food
+        if (inventoryItem != null)
+        {
+            ItemInstance itemInstance = inventoryItem.GetComponent<ItemInstance>();
+            if (itemInstance?.itemData?.itemName.Contains("Cooked") == true)
+            {
+                // Feed the cat
+                nearbyCat.Feed();
+
+                // Destroy the food
+                Destroy(inventoryItem);
+                inventoryItem = null;
+
+                Debug.Log($"{gameObject.tag} fed the cat with cooked food.");
+            }
+            else
+            {
+                Debug.Log($"{gameObject.tag} can only feed cats with cooked food.");
+            }
+        }
+        else
+        {
+            Debug.Log($"{gameObject.tag} has no food to feed the cat.");
         }
     }
 
@@ -187,6 +222,10 @@ public class PlayerController : MonoBehaviour
         {
             nearbyChest = other.GetComponent<ChestBehavior>();
         }
+        if (other.CompareTag("Cat"))
+        {
+            nearbyCat = other.GetComponent<Cat>();
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -198,6 +237,10 @@ public class PlayerController : MonoBehaviour
         else if (other.CompareTag("Chest"))
         {
             nearbyChest = null;
+        }
+        if (other.CompareTag("Cat"))
+        {
+            nearbyCat = null;
         }
     }
 }

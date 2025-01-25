@@ -397,6 +397,8 @@ public class CatManager : MonoBehaviour
     [SerializeField] private GameObject catPrefab;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform testPoint;
+    [SerializeField] private Transform wayPointN;
+    [SerializeField] private Transform wayPointS;
     [SerializeField] private Transform[] sleepPoints;
     [SerializeField] private string[] illnesses;
     [SerializeField] private string[] names;
@@ -439,7 +441,7 @@ public class CatManager : MonoBehaviour
         string randomName = names[Random.Range(0, names.Length)];
         SpriteGroup randomSpriteGroup = spriteGroups[Random.Range(0, spriteGroups.Length)];
 
-        newCat.Initialize(randomIllness, randomName);
+        newCat.Initialize(randomIllness, randomName, testPoint);
         AssignSymptoms(newCatObj, randomSpriteGroup.sprites, randomIllness);
         AssignSleepPoint(newCat);
 
@@ -483,14 +485,41 @@ public class CatManager : MonoBehaviour
     {
         for (int i = 0; i < sleepPoints.Length; i++)
         {
+            //if (!occupiedSleepPoints[i])
+            //{
+            //    occupiedSleepPoints[i] = true;
+            //    cat.SetSleepPoint(sleepPoints[i]);
+            //    //cat.MoveTo(sleepPoints[i], Cat.CatState.MovingToSleep);
+            //    return true;
+            //}
+
             if (!occupiedSleepPoints[i])
             {
                 occupiedSleepPoints[i] = true;
-                cat.SetSleepPoint(sleepPoints[i]);
-                //cat.MoveTo(sleepPoints[i], Cat.CatState.MovingToSleep);
+                Transform selectedSleepPoint = sleepPoints[i];
+
+                // Calculate distances
+                float distanceToSleepPoint = Vector3.Distance(testPoint.position, selectedSleepPoint.position);
+                float distanceToWaypointN = Vector3.Distance(testPoint.position, wayPointN.position);
+                float distanceToWaypointS = Vector3.Distance(testPoint.position, wayPointS.position);
+
+                // Determine closest waypoint
+                Transform closestWaypoint = null;
+                if (distanceToWaypointN < distanceToSleepPoint || distanceToWaypointS < distanceToSleepPoint)
+                {
+                    closestWaypoint = (distanceToWaypointN <= distanceToWaypointS) ? wayPointN : wayPointS;
+                    cat.SetWayPoint(closestWaypoint); // Assign closest waypoint if found
+
+                }
+
+
+                // Set waypoint and sleep point for the cat
+                cat.SetSleepPoint(selectedSleepPoint);
+
                 return true;
             }
-        }
+        
+    }
 
         Debug.LogWarning("No available sleep points for the cat.");
         return false;

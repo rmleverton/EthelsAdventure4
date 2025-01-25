@@ -13,13 +13,14 @@ GameObject:
   - component: {fileID: 3285879223564781127}
   - component: {fileID: 6123941080417721493}
   - component: {fileID: 1157354073353263965}
+  - component: {fileID: 3897896735462205653}
   m_Layer: 0
   m_Name: CatPrefab
   m_TagString: Cat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4307430907600542489
 Transform:
   m_ObjectHideFlags: 0
@@ -71,6 +72,10 @@ MonoBehaviour:
   illness: 
   diagnosis: 
   catName: 
+  targetPoint: {fileID: 0}
+  testPoint: {fileID: 0}
+  sleepPoint: {fileID: 0}
+  wayPoint: {fileID: 0}
 --- !u!54 &6123941080417721493
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -96,7 +101,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!212 &1157354073353263965
 SpriteRenderer:
@@ -153,3 +158,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!135 &3897896735462205653
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8850238511774426417}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}

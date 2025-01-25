@@ -1,29 +1,3 @@
-//using UnityEngine;
-
-//public class Cat : MonoBehaviour
-//{
-//    [SerializeField] private string illness;
-//    [SerializeField] private string diagnosis;
-//    [SerializeField] private string catName; // The name of the cat
-
-//    public void SetIllness(string _illness)
-//    {
-//        illness = _illness;
-//    }
-
-//    public void SetName(string _name)
-//    {
-//        catName = _name;
-//    }
-
-//    public void SetDiagnosis(string _diagnosis)
-//    {
-//        gameObject.tag = "dCat";
-//        diagnosis = _diagnosis;
-//    }
-//}
-
-
 using UnityEngine;
 
 public class Cat : MonoBehaviour
@@ -31,8 +5,10 @@ public class Cat : MonoBehaviour
     [SerializeField] private string illness;
     [SerializeField] private string diagnosis;
     [SerializeField] private string catName;
-    private Transform targetPoint;
-    private Transform sleepPoint;
+    [SerializeField] private Transform targetPoint;
+    [SerializeField] private Transform testPoint;
+    [SerializeField] private Transform sleepPoint;
+    [SerializeField] private Transform wayPoint;
     private float speed = 2f;
 
     public enum CatState
@@ -40,18 +16,35 @@ public class Cat : MonoBehaviour
         Spawning,
         MovingToTest,
         WaitingForDiagnosis,
+        MovingToWaypoint,
         MovingToSleep,
         Sleeping,
         Hungry
     }
 
+    public bool CanBeFed => CurrentState == CatState.Hungry;
+
+    public void Feed()
+    {
+        if (CurrentState == CatState.Hungry)
+        {
+            // Move directly to sleep point
+            if (sleepPoint != null)
+            {
+                MoveTo(sleepPoint, CatState.MovingToSleep);
+                Debug.Log($"Cat {catName} has been fed and is now moving to sleep.");
+            }
+        }
+    }
+
     public CatState CurrentState { get; private set; } = CatState.Spawning;
 
-    public void Initialize(string _illness, string _name)
+    public void Initialize(string _illness, string _name, Transform point)
     {
         illness = _illness;
         catName = _name;
         CurrentState = CatState.Spawning;
+        testPoint = point;
     }
 
     private void Update()
@@ -60,6 +53,10 @@ public class Cat : MonoBehaviour
         {
             MoveTowardsTarget();
         }
+        if(CurrentState == CatState.Hungry)
+        {
+            //stuff
+        }
     }
 
     private void MoveTowardsTarget()
@@ -67,7 +64,7 @@ public class Cat : MonoBehaviour
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, targetPoint.position, step);
 
-        if (Vector3.Distance(transform.position, targetPoint.position) < 0.01f)
+        if (Vector3.Distance(transform.position, targetPoint.position) < 0.5f)
         {
             OnReachedTarget();
         }
@@ -75,17 +72,29 @@ public class Cat : MonoBehaviour
 
     private void OnReachedTarget()
     {
-        targetPoint = null;
-
-        switch (CurrentState)
+        if (CurrentState == CatState.MovingToWaypoint && wayPoint != null)
         {
-            case CatState.MovingToTest:
-                CurrentState = CatState.WaitingForDiagnosis;
-                break;
+            // After reaching waypoint, set target to sleep point
+            wayPoint = null;
+            targetPoint = sleepPoint;
+            CurrentState = CatState.MovingToSleep;
+        }
+        else
+        {
+            targetPoint = null;
 
-            case CatState.MovingToSleep:
-                CurrentState = CatState.Sleeping;
-                break;
+            switch (CurrentState)
+            {
+                case CatState.MovingToTest:
+                    transform.position = testPoint.position;
+                    CurrentState = CatState.WaitingForDiagnosis;
+                    break;
+
+                case CatState.MovingToSleep:
+                    transform.position = sleepPoint.position;
+                    CurrentState = CatState.Hungry;
+                    break;
+            }
         }
     }
 
@@ -98,13 +107,39 @@ public class Cat : MonoBehaviour
     public void SetDiagnosis(string _diagnosis)
     {
         diagnosis = _diagnosis;
-        MoveTo(sleepPoint, CatState.MovingToSleep);
-        
 
+        // Check if a waypoint exists
+        if (wayPoint != null)
+        {
+            MoveTo(wayPoint, CatState.MovingToWaypoint);
+        }
+        else
+        {
+            MoveTo(sleepPoint, CatState.MovingToSleep);
+        }
     }
 
     public void SetSleepPoint(Transform point)
     {
         sleepPoint = point;
     }
+
+    public void SetWayPoint(Transform point)
+    {
+        //wayPoint = point;
+        //Debug.Log("Waypoint set to: " + point.name);
+        if (point == null)
+        {
+            Debug.Log("SetWayPoint received a null Transform.");
+            //return;
+        }
+
+        wayPoint = point;
+        Debug.Log($"Waypoint set to: {point.name}");
+
+    }
+    //public void SetTestPoint(Transform point)
+    //{
+    //    testPoint = point;
+    //}
 }
