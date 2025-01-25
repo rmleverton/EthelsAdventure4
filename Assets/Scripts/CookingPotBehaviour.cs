@@ -293,7 +293,7 @@ public class CookingPotBehaviour : MonoBehaviour
 
     public bool AddItem(GameObject item)
     {
-        if (itemsInPot.Count >= maxSlots) return false;
+        if (itemsInPot.Count >= maxSlots || isCooked || isCooking) return false;
 
         ItemInstance itemInstance = item.GetComponent<ItemInstance>();
         if (itemInstance == null) return false;
@@ -336,13 +336,21 @@ public class CookingPotBehaviour : MonoBehaviour
 
     private bool MatchRecipe(Recipe recipe)
     {
-        var ingredientCounts = itemsInPot
+        // Create a dictionary of ingredient counts in the pot
+        var potIngredientCounts = itemsInPot
             .GroupBy(item => item.itemData.itemName)
             .ToDictionary(g => g.Key, g => g.Count());
 
-        return recipe.ingredients.All(requiredItem =>
-            ingredientCounts.ContainsKey(requiredItem.itemName) &&
-            ingredientCounts[requiredItem.itemName] > 0);
+        // Create a dictionary of required ingredient counts for the recipe
+        var recipeIngredientCounts = recipe.ingredients
+            .GroupBy(item => item.itemName)
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        // Check if the ingredient counts exactly match
+        return potIngredientCounts.Count == recipeIngredientCounts.Count &&
+               recipeIngredientCounts.All(recipeItem =>
+                   potIngredientCounts.ContainsKey(recipeItem.Key) &&
+                   potIngredientCounts[recipeItem.Key] == recipeItem.Value);
     }
 
     private void FinishCooking()

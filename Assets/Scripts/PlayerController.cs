@@ -391,7 +391,7 @@ public class PlayerController : MonoBehaviour
     private void HandlePotInteraction()
     {
         // If holding an item and pot has space
-        if (inventoryItem != null)
+        if (inventoryItem != null )
         {
             ItemInstance itemInstance = inventoryItem.GetComponent<ItemInstance>();
             string itemName = itemInstance?.itemData?.itemName ?? inventoryItem.name;
@@ -450,33 +450,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    
     private void HandleDropAction()
     {
         if (nearbyPot != null)
         {
-            GameObject cookedFood = nearbyPot.TakeCooked();
-            if (cookedFood != null)
+            // If player has an item and is near the pot, drop player's item into fire
+            if (inventoryItem != null)
             {
-                ItemInstance foodInstance = cookedFood.GetComponent<ItemInstance>();
-                string foodName = foodInstance?.itemData?.itemName ?? cookedFood.name;
+                ItemInstance itemInstance = inventoryItem.GetComponent<ItemInstance>();
+                string itemName = itemInstance?.itemData?.itemName ?? inventoryItem.name;
 
-                Debug.Log($"{gameObject.tag} destroyed {foodName} from the cooking pot.");
-                Destroy(cookedFood);
+                Debug.Log($"{gameObject.tag} dropped {itemName} into the fire and destroyed it.");
+                Destroy(inventoryItem);
+                inventoryItem = null;
             }
-        }
+            // If player's inventory is empty and pot has cooked food, destroy cooked food
+            else
+            {
+                GameObject cookedFood = nearbyPot.TakeCooked();
+                if (cookedFood != null)
+                {
+                    ItemInstance foodInstance = cookedFood.GetComponent<ItemInstance>();
+                    string foodName = foodInstance?.itemData?.itemName ?? cookedFood.name;
 
-        if (inventoryItem != null)
-        {
-            ItemInstance itemInstance = inventoryItem.GetComponent<ItemInstance>();
-            string itemName = itemInstance?.itemData?.itemName ?? inventoryItem.name;
-
-            Debug.Log($"{gameObject.tag} dropped {itemName} into the fire and destroyed it.");
-            Destroy(inventoryItem);
-            inventoryItem = null;
+                    Debug.Log($"{gameObject.tag} destroyed {foodName} from the cooking pot.");
+                    Destroy(cookedFood);
+                }
+                else
+                {
+                    Debug.Log($"{gameObject.tag} has no item to drop.");
+                }
+            }
         }
         else
         {
-            Debug.Log($"{gameObject.tag} has no item to drop.");
+            Debug.Log("Can't Drop Here Mate");
         }
     }
 
