@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b8f7a9108874474c84a9d0bd641a76c, type: 3}
-  m_Name: MangeMeds
+  m_Name: Kittalin
   m_EditorClassIdentifier: 
-  itemName: Mange Meds
-  itemSprite: {fileID: 0}
+  itemName: Kittalin
+  itemSprite: {fileID: 21300000, guid: 9ff582d5aa8fb4ffd808ececed47b9d5, type: 3}
