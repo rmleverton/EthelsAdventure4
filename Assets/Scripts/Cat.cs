@@ -2,16 +2,23 @@ using UnityEngine;
 
 public class Cat : MonoBehaviour
 {
+    [SerializeField] private string illness;
+    [SerializeField] private string diagnosis;
+    [SerializeField] private string catName; // The name of the cat
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void SetIllness(string _illness)
     {
-        
+        illness = _illness;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetName(string _name)
     {
-        
+        catName = _name;
+    }
+
+    public void SetDiagnosis(string _diagnosis)
+    {
+        gameObject.tag = "dCat";
+        diagnosis = _diagnosis;
     }
 }

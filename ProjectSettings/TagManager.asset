@@ -9,6 +9,7 @@ TagManager:
   - Chest
   - CookingPot
   - Cat
+  - dCat
   layers:
   - Default
   - TransparentFX
