@@ -51,6 +51,7 @@ ExportedObj/
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
+*.meta
 
 # Unity3D generated file on crash reports
 sysinfo.txt
@@ -73,3 +74,4 @@ crashlytics-build.properties
 
 # MacOS Filesystem
 *.DS_Store
+*/.DS_Store
