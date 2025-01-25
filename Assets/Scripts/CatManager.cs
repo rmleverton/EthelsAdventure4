@@ -116,6 +116,10 @@ public class CatManager : MonoBehaviour
     [SerializeField] private float spawnInterval = 200.0f; // Time between spawns
     private float spawnTimer;
 
+    private void Start()
+    {
+        SpawnCat();
+    }
     private void Update()
     {
         // Handle spawning cats at intervals
