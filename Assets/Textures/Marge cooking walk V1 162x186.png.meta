@@ -108,12 +108,386 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Marge cooking walk_Down_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 558
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31a0a395b0f944e209adcff75c371808
+      internalID: 1929630953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Down_1
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 558
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9502a93a406fc4b299a8a22a3e2d8de0
+      internalID: -1816737561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Down_2
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 558
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 248cc4027a9554216a8a79c7d0a305dc
+      internalID: -231436162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Down_3
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 558
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cde44ee88d51e48908b20688e34e19c9
+      internalID: 430945450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Left_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 372
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c38e782b19e64290a9224922149b3f4
+      internalID: -1747991886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Left_1
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 372
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a4eeb3ca359f41598f54791585e39de
+      internalID: 1986015679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Left_2
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 372
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4711a9adc7b0d4cd094ac66e2647f222
+      internalID: 934781034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Left_3
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 372
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d19059b494454425ead12a7136f4d534
+      internalID: -1272958299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Up_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 186
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1d1d0f14939945c590c520172271be3
+      internalID: 517591310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Up_1
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 186
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a04f15059ee24e919b6593966927abd
+      internalID: 1371582252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Up_2
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 186
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa022bbb9515e4e65b78c005fc52cd0f
+      internalID: -666246188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Up_3
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 186
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 845eca698d15d462985dbf9e99bbfda2
+      internalID: 1438679292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Right_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52fff6e0c3ac0470d969b39c8eb456f0
+      internalID: -1251521092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Right_1
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 0
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8b3f084cfdd6465c9a1988f059dbcbc
+      internalID: -1023576734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Right_2
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 0
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08cfc9b51e69d4deab47e051830f6bea
+      internalID: -313064621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk_Right_3
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 0
+        width: 162
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca25091cec9ec40b595acdbcbbbae83c
+      internalID: 943801576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Marge cooking walk V1 162x186_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 12
+        width: 648
+        height: 732
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00f880be615b842a2877d52f6e4a22a3
+      internalID: -1753057270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c15bf4ecd64754c13ba7aa31025fa12d
     internalID: 0
     vertices: []
     indices: 
@@ -122,7 +496,24 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Marge cooking walk V1 162x186_0: -1753057270
+      Marge cooking walk_Down_0: 1929630953
+      Marge cooking walk_Down_1: -1816737561
+      Marge cooking walk_Down_2: -231436162
+      Marge cooking walk_Down_3: 430945450
+      Marge cooking walk_Left_0: -1747991886
+      Marge cooking walk_Left_1: 1986015679
+      Marge cooking walk_Left_2: 934781034
+      Marge cooking walk_Left_3: -1272958299
+      Marge cooking walk_Right_0: -1251521092
+      Marge cooking walk_Right_1: -1023576734
+      Marge cooking walk_Right_2: -313064621
+      Marge cooking walk_Right_3: 943801576
+      Marge cooking walk_Up_0: 517591310
+      Marge cooking walk_Up_1: 1371582252
+      Marge cooking walk_Up_2: -666246188
+      Marge cooking walk_Up_3: 1438679292
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
