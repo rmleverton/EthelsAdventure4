@@ -225,6 +225,7 @@
 //}
 
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -254,12 +255,23 @@ public class CookingPotBehaviour : MonoBehaviour
     private Color cookingColor = Color.cyan;
     private Color cookedColor = Color.blue;
 
-    
+    [Header("Ingredient Sprites")]
+    [SerializeField] private SpriteGroup[] spriteGroups;
+    [SerializeField] public GameObject cookingPotInventoryCanvas;
+    [SerializeField] public Image[] ingredientImageSlots;
+    [SerializeField] public Image cookingImageSlot;
+    [SerializeField] public Image cookedImageSlot;
+
 
     void Start()
     {
         potRenderer = GetComponent<Renderer>();
         ResetPotColor();
+
+        //Set ingredient slots UI to disabled. 
+        cookingPotInventoryCanvas.SetActive(false);
+        cookingImageSlot.enabled = false;
+        cookedImageSlot.enabled = false;
     }
 
     void Update()
@@ -299,10 +311,11 @@ public class CookingPotBehaviour : MonoBehaviour
         if (itemInstance == null) return false;
 
         itemsInPot.Add(itemInstance);
-        var itemName = itemInstance.itemData.itemName;
-        Debug.Log($"Item {itemName} added to the pot.");
+
+        Debug.Log($"Item {itemInstance.itemData.itemName} added to the pot.");
+
         UpdatePotColor();
-        AddIngredientToUI(itemName); //ADD THE INGREDIENT TO THE UI CAMPFIRE UI PANEL. 
+        AddIngredientToUI(itemInstance); //ADD THE INGREDIENT TO THE UI CAMPFIRE UI PANEL. 
 
         if (itemsInPot.Count == maxSlots)
         {
@@ -317,6 +330,9 @@ public class CookingPotBehaviour : MonoBehaviour
         isCooking = true;
         cookingTimer = totalCookingTime;
         DetermineRecipe();
+
+        //Set Inventory Panel items to empty and invisible. Activate centre panel with cooking sprite.
+        HandleCooking(true);
     }
 
     private void DetermineRecipe()
@@ -361,6 +377,9 @@ public class CookingPotBehaviour : MonoBehaviour
         isCooked = true;
         potRenderer.material.color = cookedColor;
         itemsInPot.Clear();
+
+        //Set centre panel with cooked sprite.
+        HandleCooking(false);
     }
 
     public GameObject TakeCooked()
@@ -374,6 +393,9 @@ public class CookingPotBehaviour : MonoBehaviour
         {
             itemInstance.itemData = CookedFoodData;
         }
+
+        //Set centre panel with cooking sprite.
+        HandleCooking(true);
 
         ResetPotState();
         return cookedItem;
@@ -418,10 +440,35 @@ public class CookingPotBehaviour : MonoBehaviour
         }
     }
 
-    private void AddIngredientToUI(string item)
+    private void AddIngredientToUI(ItemInstance item)
     {
-        Debug.Log($"Added {item} to ingredient list UI.");
+        //Set ingredient slots UI to enabled. 
+        cookingPotInventoryCanvas.SetActive(true);
+        cookingImageSlot.enabled = cookedImageSlot.enabled = false;
+        for (int i = 0; i < ingredientImageSlots.Length; i++)
+        {
+            ingredientImageSlots[i].enabled = true;
+        }
+
+        //Get the amount of ingredients and subtract 1 to get the ingredientImageSlot index. 
+        var slotIndex = itemsInPot.Count - 1;
+        //Set the sprite in the slot to the current ingredient sprite - visual marker of the cooking pot inventory. 
+        ingredientImageSlots[slotIndex].sprite = item.itemData.itemSprite;
+
+        Debug.Log($"Added {item.itemData.itemName} to ingredient list UI.");
     }
+
+    private void HandleCooking(bool cooking)
+    {
+        for (int i = 0; i < ingredientImageSlots.Length; i++)
+        {
+            ingredientImageSlots[i].enabled = false;
+        }
+        //Switch between cooking and cooked.
+        cookingImageSlot.enabled = cooking;
+        cookedImageSlot.enabled = !cooking;
+    }
+
 }
 
 [System.Serializable]
