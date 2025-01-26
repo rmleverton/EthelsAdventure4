@@ -428,13 +428,21 @@ public class CatManager : MonoBehaviour
 
     private void SpawnCat()
     {
+        //if (catPrefab == null || illnesses.Length == 0 || names.Length == 0 || spriteGroups.Length == 0)
+        //{
+        //    Debug.LogWarning("CatManager is not properly configured.");
+        //    return;
+        //}
+
+        //GameObject newCatObj = Instantiate(catPrefab, spawnPoint.position, Quaternion.identity);
+        //Cat newCat = newCatObj.GetComponent<Cat>();
         if (catPrefab == null || illnesses.Length == 0 || names.Length == 0 || spriteGroups.Length == 0)
         {
             Debug.LogWarning("CatManager is not properly configured.");
             return;
         }
 
-        GameObject newCatObj = Instantiate(catPrefab, spawnPoint.position, Quaternion.identity);
+        GameObject newCatObj = Instantiate(catPrefab, spawnPoint.position, Quaternion.identity, transform);
         Cat newCat = newCatObj.GetComponent<Cat>();
 
         string randomIllness = illnesses[Random.Range(0, illnesses.Length)];

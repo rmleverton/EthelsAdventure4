@@ -11,6 +11,12 @@ public class Cat : MonoBehaviour
     [SerializeField] private Transform wayPoint;
     private float speed = 2f;
 
+
+    //private void Awake()
+    //{
+    //    Debug.Log($"Cat Awake: {gameObject.activeSelf}");
+    //}
+
     public enum CatState
     {
         Spawning,
@@ -39,12 +45,21 @@ public class Cat : MonoBehaviour
 
     public CatState CurrentState { get; private set; } = CatState.Spawning;
 
+    //public void Initialize(string _illness, string _name, Transform point)
+    //{
+    //    illness = _illness;
+    //    catName = _name;
+    //    CurrentState = CatState.Spawning;
+    //    testPoint = point;
+    //}
     public void Initialize(string _illness, string _name, Transform point)
     {
         illness = _illness;
         catName = _name;
         CurrentState = CatState.Spawning;
         testPoint = point;
+
+        gameObject.SetActive(true);
     }
 
     private void Update()

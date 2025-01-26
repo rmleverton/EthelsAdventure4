@@ -258,9 +258,9 @@ public class CookingPotBehaviour : MonoBehaviour
     [Header("Ingredient Sprites")]
     [SerializeField] private SpriteGroup[] spriteGroups;
     [SerializeField] public GameObject cookingPotInventoryCanvas;
-    [SerializeField] public Image[] ingredientImageSlots;
-    [SerializeField] public Image cookingImageSlot;
-    [SerializeField] public Image cookedImageSlot;
+    [SerializeField] public GameObject[] ingredientImageSlots;
+    [SerializeField] public GameObject cookingImageSlot;
+    [SerializeField] public GameObject cookedImageSlot;
 
 
     void Start()
@@ -270,8 +270,11 @@ public class CookingPotBehaviour : MonoBehaviour
 
         //Set ingredient slots UI to disabled. 
         cookingPotInventoryCanvas.SetActive(false);
-        cookingImageSlot.enabled = false;
-        cookedImageSlot.enabled = false;
+        //cookingImageSlot.enabled = false;
+        //cookedImageSlot.enabled = false;
+        cookingImageSlot.SetActive(false);
+        cookedImageSlot.SetActive(false);
+        
     }
 
     void Update()
@@ -440,21 +443,48 @@ public class CookingPotBehaviour : MonoBehaviour
         }
     }
 
+    //private void AddIngredientToUI(ItemInstance item)
+    //{
+    //    //Set ingredient slots UI to enabled. 
+    //    cookingPotInventoryCanvas.SetActive(true);
+    //    cookingImageSlot.enabled = cookedImageSlot.enabled = false;
+    //    for (int i = 0; i < ingredientImageSlots.Length; i++)
+    //    {
+    //        ingredientImageSlots[i].enabled = true;
+    //    }
+
+    //    //Get the amount of ingredients and subtract 1 to get the ingredientImageSlot index. 
+    //    var slotIndex = itemsInPot.Count - 1;
+    //    //Set the sprite in the slot to the current ingredient sprite - visual marker of the cooking pot inventory. 
+    //    ingredientImageSlots[slotIndex].sprite = item.itemData.itemSprite;
+
+    //    Debug.Log($"Added {item.itemData.itemName} to ingredient list UI.");
+    //}
+
+    //private void HandleCooking(bool cooking)
+    //{
+    //    for (int i = 0; i < ingredientImageSlots.Length; i++)
+    //    {
+    //        ingredientImageSlots[i].enabled = false;
+    //    }
+    //    //Switch between cooking and cooked.
+    //    cookingImageSlot.enabled = cooking;
+    //    cookedImageSlot.enabled = !cooking;
+    //}
+
     private void AddIngredientToUI(ItemInstance item)
     {
-        //Set ingredient slots UI to enabled. 
         cookingPotInventoryCanvas.SetActive(true);
-        cookingImageSlot.enabled = cookedImageSlot.enabled = false;
+        cookingImageSlot.SetActive(false);
+        cookedImageSlot.SetActive(false);
+
         for (int i = 0; i < ingredientImageSlots.Length; i++)
         {
-            ingredientImageSlots[i].enabled = true;
+            ingredientImageSlots[i].SetActive(true);
         }
 
-        //Get the amount of ingredients and subtract 1 to get the ingredientImageSlot index. 
         var slotIndex = itemsInPot.Count - 1;
-        //Set the sprite in the slot to the current ingredient sprite - visual marker of the cooking pot inventory. 
-        ingredientImageSlots[slotIndex].sprite = item.itemData.itemSprite;
-
+        ingredientImageSlots[slotIndex].GetComponent<UnityEngine.UI.Image>().sprite = item.itemData.itemSprite;
         Debug.Log($"Added {item.itemData.itemName} to ingredient list UI.");
     }
 
@@ -462,11 +492,11 @@ public class CookingPotBehaviour : MonoBehaviour
     {
         for (int i = 0; i < ingredientImageSlots.Length; i++)
         {
-            ingredientImageSlots[i].enabled = false;
+            ingredientImageSlots[i].SetActive(false);
         }
-        //Switch between cooking and cooked.
-        cookingImageSlot.enabled = cooking;
-        cookedImageSlot.enabled = !cooking;
+
+        cookingImageSlot.SetActive(cooking);
+        cookedImageSlot.SetActive(!cooking);
     }
 
 }
