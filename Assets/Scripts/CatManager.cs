@@ -37,14 +37,7 @@ public class CatManager : MonoBehaviour
 
     private void SpawnCat()
     {
-        //if (catPrefab == null || illnesses.Length == 0 || names.Length == 0 || spriteGroups.Length == 0)
-        //{
-        //    Debug.LogWarning("CatManager is not properly configured.");
-        //    return;
-        //}
-
-        //GameObject newCatObj = Instantiate(catPrefab, spawnPoint.position, Quaternion.identity);
-        //Cat newCat = newCatObj.GetComponent<Cat>();
+        
         if (catPrefab == null || illnesses.Length == 0 || names.Length == 0 || spriteGroups.Length == 0)
         {
             Debug.LogWarning("CatManager is not properly configured.");
@@ -105,13 +98,7 @@ public class CatManager : MonoBehaviour
     {
         for (int i = 0; i < sleepPoints.Length; i++)
         {
-            //if (!occupiedSleepPoints[i])
-            //{
-            //    occupiedSleepPoints[i] = true;
-            //    cat.SetSleepPoint(sleepPoints[i]);
-            //    //cat.MoveTo(sleepPoints[i], Cat.CatState.MovingToSleep);
-            //    return true;
-            //}
+            
 
             if (!occupiedSleepPoints[i])
             {
