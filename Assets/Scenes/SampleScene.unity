@@ -5402,23 +5402,32 @@ MonoBehaviour:
   - Thermos
   spriteGroups:
   - groupName: Neo
-    sprites: []
+    sprites:
+    - {fileID: 21300000, guid: 9183955d0628749d59eb44d474837b12, type: 3}
   - groupName: Luna
-    sprites: []
+    sprites:
+    - {fileID: 21300000, guid: 5af550e8221f54fe6b4da33307400c05, type: 3}
   - groupName: Gizmo
-    sprites: []
+    sprites:
+    - {fileID: 21300000, guid: ccc49873944084849ad931919e72125d, type: 3}
   - groupName: Basil
-    sprites: []
+    sprites:
+    - {fileID: 21300000, guid: a4aff2b6ef31242bfb23770163a94e0c, type: 3}
   - groupName: Pickle
-    sprites: []
+    sprites:
+    - {fileID: 21300000, guid: a85fa61fe65ab4a86adf943dabc47671, type: 3}
   - groupName: Aloo Gobi
-    sprites: []
+    sprites:
+    - {fileID: 21300000, guid: 208469e15d0a5474aa376c7e79a4f853, type: 3}
   - groupName: Custard
-    sprites: []
+    sprites:
+    - {fileID: 21300000, guid: 506dc937b466944eeab0a4896ec7b09a, type: 3}
   - groupName: Chewy
-    sprites: []
+    sprites:
+    - {fileID: 21300000, guid: b503d5387a89144bc9b6f38db7ae8013, type: 3}
   - groupName: Thermos
-    sprites: []
+    sprites:
+    - {fileID: 21300000, guid: 0396f0897a6ff4460bfe22a6772c74a7, type: 3}
   spawnInterval: 200
 --- !u!4 &1196120107
 Transform:
