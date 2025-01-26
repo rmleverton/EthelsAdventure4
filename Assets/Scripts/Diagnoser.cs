@@ -6,6 +6,7 @@ public class Diagnoser : MonoBehaviour
     [SerializeField] private GameObject uiMenu; // Reference to the UI menu GameObject
     private GameObject _cat;
     [SerializeField] private Image catImage;
+    [SerializeField] private Sprite[] meds;
 
     private void Start()
     {
@@ -54,9 +55,36 @@ public class Diagnoser : MonoBehaviour
     }
 
     public void MakeDiagnosis(string diagnosis){
-        _cat.GetComponent<Cat>().SetDiagnosis(diagnosis);
+        Sprite diagnosisSprite = GetDiagnosisSprite(diagnosis);
+        _cat.GetComponent<Cat>().SetDiagnosis(diagnosis, diagnosisSprite);
         CloseMenu();
         Debug.Log(diagnosis);
 
+    }
+
+    private Sprite GetDiagnosisSprite(string diagnosis)
+    {
+        if (diagnosis == "Mange" && meds.Length > 0)
+            return meds[0];
+        else if (diagnosis == "Catatonia" && meds.Length > 1)
+            return meds[1];
+        else if (diagnosis == "Crestfeline" && meds.Length > 2)
+            return meds[2];
+        else if (diagnosis == "Dysentery" && meds.Length > 3)
+            return meds[3];
+        else if (diagnosis == "Mad Cat Disease" && meds.Length > 4)
+            return meds[4];
+        else if (diagnosis == "Feline Flu" && meds.Length > 5)
+            return meds[5];
+        else if (diagnosis == "Catnip Withdrawal" && meds.Length > 6)
+            return meds[6];
+        else if (diagnosis == "Radiation Sickness" && meds.Length > 7)
+            return meds[7];
+        else if(diagnosis == "Wasteland Parasites" && meds.Length > 8)
+            return meds[8];
+        else
+        {
+            return null;
+        }
     }
 }

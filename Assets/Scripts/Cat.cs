@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Cat : MonoBehaviour
 {
@@ -17,7 +18,10 @@ public class Cat : MonoBehaviour
     private Sprite illImage;
 
     private Sprite prescription;
+    [SerializeField] private GameObject prescriptionUI;
+    [SerializeField] private SpriteRenderer prescriptionUIImage;
 
+    [SerializeField] private Sprite defaultSad;
     //private void Awake()
     //{
     //    Debug.Log($"Cat Awake: {gameObject.activeSelf}");
@@ -36,17 +40,30 @@ public class Cat : MonoBehaviour
 
     public bool CanBeFed => CurrentState == CatState.Hungry;
 
-    public void Feed()
+    public void Feed(ItemInstance medicine)
     {
         if (CurrentState == CatState.Hungry)
         {
-            // Move directly to sleep point
-            if (sleepPoint != null)
+            //// Move directly to sleep point
+            //if (sleepPoint != null)
+            //{
+            //    MoveTo(sleepPoint, CatState.MovingToSleep);
+            //    Debug.Log($"Cat {catName} has been fed and is now moving to sleep.");
+            //}
+            if(medicine.GetItemCure() == illness)
             {
-                MoveTo(sleepPoint, CatState.MovingToSleep);
-                Debug.Log($"Cat {catName} has been fed and is now moving to sleep.");
+                prescriptionUI.SetActive(false);
+                CurrentState = CatState.Sleeping;
             }
+            else
+            {
+                prescriptionUIImage.sprite = defaultSad;
+                CurrentState = CatState.Sleeping;
+            }
+            
         }
+
+
     }
 
     public CatState CurrentState { get; private set; } = CatState.Spawning;
@@ -68,6 +85,8 @@ public class Cat : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         spriteRenderer.sprite = _exImage;
         illImage = _illImage;
+
+        prescriptionUI.SetActive(false);
 
         gameObject.SetActive(true);
     }
@@ -96,7 +115,7 @@ public class Cat : MonoBehaviour
         if (moveDirection != Vector3.zero)
         {
             float angle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, angle - 90, 0);
+            spriteRenderer.transform.rotation = Quaternion.Euler(75, angle - 90, 0);
         }
 
         if(moveDirection.x < 0)
@@ -150,9 +169,13 @@ public class Cat : MonoBehaviour
         CurrentState = newState;
     }
 
-    public void SetDiagnosis(string _diagnosis)
+    public void SetDiagnosis(string _diagnosis, Sprite _prescription)
     {
         diagnosis = _diagnosis;
+        prescription = _prescription;
+
+        prescriptionUIImage.sprite = prescription;
+        prescriptionUI.SetActive(true);
 
         // Check if a waypoint exists
         if (wayPoint != null)

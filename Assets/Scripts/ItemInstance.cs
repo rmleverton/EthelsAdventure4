@@ -17,4 +17,9 @@ public class ItemInstance : MonoBehaviour
     {
         return itemData != null ? itemData.itemName : "Unknown";
     }
+
+    public string GetItemCure()
+    {
+        return itemData != null ? itemData.disease : "Not A Cure";
+    }
 }

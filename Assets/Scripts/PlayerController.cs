@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
     private InputAction interactAction;
     private InputAction dropAction;
+    private InputAction catAction;
 
     public Animator anim;
 
@@ -32,10 +33,12 @@ public class PlayerController : MonoBehaviour
         string moveActionName = transform.CompareTag("Player One") ? "MovePlayerOne" : "MovePlayerTwo";
         string interactActionName = transform.CompareTag("Player One") ? "InteractPlayerOne" : "InteractPlayerTwo";
         string dropActionName = transform.CompareTag("Player One") ? "DropPlayerOne" : "DropPlayerTwo";
+        string catActionName = transform.CompareTag("Player One") ? "CatPlayerOne" : "CatPlayerTwo";
 
         moveAction = InputSystem.actions.FindAction(moveActionName);
         interactAction = InputSystem.actions.FindAction(interactActionName);
         dropAction = InputSystem.actions.FindAction(dropActionName);
+        catAction = InputSystem.actions.FindAction(catActionName);
     }
 
     void Update()
@@ -65,6 +68,10 @@ public class PlayerController : MonoBehaviour
         {
             HandleDropAction();
         }
+        if (catAction?.WasPerformedThisFrame() == true)
+        {
+            InteractWithCat();
+        }
     }
 
     private void InteractWithNearbyObjects()
@@ -77,9 +84,18 @@ public class PlayerController : MonoBehaviour
         {
             InteractWithChest();
         }
+        
+    }
+
+    private void InteractWithCat()
+    {
         if (nearbyCat != null && nearbyCat.CanBeFed)
         {
             HandleCatFeeding();
+        }
+        else
+        {
+            Debug.Log("Cannot Feed Cat");
         }
     }
 
@@ -129,7 +145,7 @@ public class PlayerController : MonoBehaviour
             if (itemInstance?.itemData?.itemName.Contains("Cooked") == true)
             {
                 // Feed the cat
-                nearbyCat.Feed();
+                nearbyCat.Feed(itemInstance);
 
                 // Destroy the food
                 Destroy(inventoryItem);
