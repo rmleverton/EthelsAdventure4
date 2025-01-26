@@ -26,11 +26,17 @@ public class PlayerController : MonoBehaviour
     private Cat nearbyCat;
 
     [SerializeField] SpriteRenderer inventoryItemUI;
+    [SerializeField] GameObject medicineUI;
+    [SerializeField] GameObject[] medicinePanels;
+    int medicinePanelsIndex;
 
     private void Start()
     {
         ConfigureInputActions();
         anim = GetComponentInChildren<Animator>();
+
+        medicineUI.SetActive(false);
+        medicinePanelsIndex = 0;
     }
 
     private void ConfigureInputActions()
@@ -255,22 +261,53 @@ public class PlayerController : MonoBehaviour
 
     private void OpenBook()
     {
-
-    }
-
-    private void CloseBook()
-    {
-
+        if (medicineUI.activeSelf)
+        {
+            medicineUI.SetActive(false);
+        } else
+        {
+            medicineUI.SetActive(true);
+        }
     }
 
     private void PageUp()
     {
-
+        if (medicineUI.activeSelf)
+        {
+            medicinePanelsIndex = (medicinePanelsIndex + 1) % 3;
+            for (int i = 0; i < medicinePanels.Length; i++)
+            {
+                if (i == medicinePanelsIndex)
+                {
+                    medicinePanels[i].SetActive(true);
+                }
+                else
+                {
+                    medicinePanels[i].SetActive(false);
+                }
+            }
+        }
+        Debug.Log($"{medicinePanelsIndex}");
     }
 
     private void PageDown()
     {
-
+        if (medicineUI.activeSelf)
+        {
+            medicinePanelsIndex = (medicinePanelsIndex - 1 + 3) % 3;
+            for (int i = 0; i < medicinePanels.Length; i++)
+            {
+                if (i == medicinePanelsIndex)
+                {
+                    medicinePanels[i].SetActive(true);
+                }
+                else
+                {
+                    medicinePanels[i].SetActive(false);
+                }
+            }
+        }
+        Debug.Log($"{medicinePanelsIndex}");
     }
 
     private void OnTriggerEnter(Collider other)
