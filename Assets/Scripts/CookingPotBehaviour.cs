@@ -1,229 +1,3 @@
-//using UnityEngine;
-//using System.Collections.Generic;
-//using System.Linq;
-
-//public class CookingPotBehaviour : MonoBehaviour
-//{
-//    public int maxSlots = 3; // Maximum number of items the pot can hold
-//    [SerializeField] private List<ItemInstance> itemsInPot = new List<ItemInstance>(); // Stores items in the pot
-//    private Renderer potRenderer;
-//    private Color defaultColor = Color.gray; // Default color of the pot
-//    private Color highlightColor = Color.green; // Color when a player is nearby
-//    private Color fullColor = Color.red; // Color when the pot is full
-//    private Color cookingColor = Color.cyan; // Color when the pot is cooking
-//    private Color cookedColor = Color.blue; // Color when the pot has finished cooking
-
-//    private float totalCookingTime = 10.0f;
-//    [SerializeField] private float cookingTimer;
-//    [SerializeField] private bool isCooking = false;
-//    [SerializeField] private bool isCooked = false;
-
-//    public Item cookedFoodData; // Resulting cooked food
-//    public Item defaultJunkFoodData; // Default food if no recipe matches
-//    public GameObject itemPrefab; // Prefab used to spawn the cooked food
-
-//    [Header("Recipes")]
-//    public List<Recipe> recipes; // List of recipes
-
-//    void Start()
-//    {
-//        potRenderer = GetComponent<Renderer>();
-//        if (potRenderer != null)
-//        {
-//            potRenderer.material.color = defaultColor;
-//        }
-//    }
-
-//    private void Update()
-//    {
-//        if (isCooking)
-//        {
-//            Cooking();
-//        }
-//    }
-
-//    private void OnTriggerEnter(Collider other)
-//    {
-//        if (other.CompareTag("Player One") || other.CompareTag("Player Two"))
-//        {
-//            UpdatePotColor();
-//        }
-//    }
-
-//    private void OnTriggerExit(Collider other)
-//    {
-
-//        if (other.CompareTag("Player One") || other.CompareTag("Player Two"))
-//        {
-//            if (potRenderer != null && !isCooking && !isCooked)
-//            {
-//                potRenderer.material.color = defaultColor;
-//            }
-//            else if (isCooked)
-//            {
-//                potRenderer.material.color = cookedColor;
-//            }
-//        }
-//    }
-
-//    public bool AddItem(GameObject item)
-//    {
-//        ItemInstance itemInstance = item.GetComponent<ItemInstance>();
-//        if (itemInstance != null && itemsInPot.Count < maxSlots)
-//        {
-//            itemsInPot.Add(itemInstance);
-//            Debug.Log($"Item {itemInstance.itemData.itemName} added to the pot.");
-//            UpdatePotColor();
-
-//            if (itemsInPot.Count == maxSlots)
-//            {
-//                isCooking = true;
-//                cookingTimer = totalCookingTime;
-//                RecipeLogic();
-//            }
-//            return true;
-//        }
-//        else
-//        {
-//            Debug.Log($"The pot is full or the item is invalid. Item {item.name} has been destroyed.");
-//            return false;
-//        }
-//    }
-
-//    private void UpdatePotColor()
-//    {
-//        if (potRenderer != null)
-//        {
-//            potRenderer.material.color = itemsInPot.Count >= maxSlots ? fullColor : highlightColor;
-//        }
-//    }
-
-//    private void Cooking()
-//    {
-//        if (cookingTimer <= 0.0f)
-//        {
-//            FinishCooking();
-//            return;
-//        }
-
-//        cookingTimer -= Time.deltaTime;
-//        Color tempCol = Color.Lerp(cookingColor, fullColor, cookingTimer / totalCookingTime);
-//        potRenderer.material.color = tempCol;
-//    }
-
-//    private void FinishCooking()
-//    {
-//        isCooking = false;
-//        isCooked = true;
-//        potRenderer.material.color = cookedColor;
-
-//        SpawnCookedItem();
-//        Debug.Log($"Cooking complete. Result: {cookedFoodData.itemName}");
-//    }
-
-//    private void RecipeLogic()
-//    {
-//        // Get a list of the item names
-//        List<string> ingredientNames = itemsInPot.Select(item => item.itemData.itemName).ToList();
-
-//        //foreach (Recipe recipe in recipes)
-//        //{
-//        //    if (recipe.ingredients.All(requiredItem => itemsInPot.Any(item => item.itemData.itemName == requiredItem.itemName)))
-//        //    {
-//        //        cookedFoodData = recipe.result;
-//        //        Debug.Log($"Recipe matched! Created {cookedFoodData.itemName}.");
-//        //        itemsInPot.Clear();
-//        //        return;
-//        //    }
-//        //}
-
-
-
-//        //// If no recipe matches, produce junk food
-//        //cookedFoodData = defaultJunkFoodData;
-//        //Debug.Log("No matching recipe. Producing junk food.");
-//        foreach (Recipe recipe in recipes)
-//        {
-//            bool allIngredientsMatch = true;
-
-//            // Create a dictionary to count items in the pot
-//            Dictionary<string, int> itemCountsInPot = new Dictionary<string, int>();
-
-//            // Count the items in the pot
-//            foreach (var item in itemsInPot)
-//            {
-//                string itemName = item.itemData.itemName;
-//                if (itemCountsInPot.ContainsKey(itemName))
-//                {
-//                    itemCountsInPot[itemName]++;
-//                }
-//                else
-//                {
-//                    itemCountsInPot[itemName] = 1;
-//                }
-//            }
-
-//            // Now compare the recipe's ingredients with the counts in the pot
-//            foreach (var requiredItem in recipe.ingredients)
-//            {
-//                string requiredItemName = requiredItem.itemName;
-
-//                if (!itemCountsInPot.ContainsKey(requiredItemName) || itemCountsInPot[requiredItemName] <= 0)
-//                {
-//                    allIngredientsMatch = false;
-//                    break;
-//                }
-
-//                // Decrease the count for the matched ingredient
-//                itemCountsInPot[requiredItemName]--;
-//            }
-
-//            // If all ingredients match, process the recipe, otherwise, it's junk
-//            if (allIngredientsMatch)
-//            {
-//                cookedFoodData = recipe.result;
-//                Debug.Log($"Recipe matched! Created {cookedFoodData.itemName}.");
-//                itemsInPot.Clear();
-//                return;
-//            }
-//        }
-
-//        // If no recipe matched, create junk food
-//        cookedFoodData = defaultJunkFoodData;  // Set the result to junk food if no match
-//        Debug.Log("No recipe matched. Created junk food.");
-
-//    }
-
-//    private void SpawnCookedItem()
-//    {
-//        if (cookedFoodData != null && itemPrefab != null)
-//        {
-//            GameObject cookedItem = Instantiate(itemPrefab, transform.position + Vector3.up, Quaternion.identity);
-//            ItemInstance itemInstance = cookedItem.GetComponent<ItemInstance>();
-
-//            if (itemInstance != null)
-//            {
-//                itemInstance.itemData = cookedFoodData;
-//            }
-//        }
-//        else
-//        {
-//            Debug.LogWarning("Cooked food data or item prefab is missing.");
-//        }
-//    }
-
-
-//}
-
-
-
-//[System.Serializable]
-//public class Recipe
-//{
-//    public List<Item> ingredients; // Items required for the recipe
-//    public Item result; // Resulting item
-//}
-
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -245,12 +19,12 @@ public class CookingPotBehaviour : MonoBehaviour
     [Header("Cooking Parameters")]
     public float totalCookingTime = 10.0f;
     [SerializeField] private float cookingTimer;
-    [SerializeField] public Item CookedFoodData;
+    [SerializeField] public Item cookedFoodData;
 
     [Header("Rendering")]
-    private Renderer potRenderer;
-    private Color defaultColor = Color.gray;
-    private Color highlightColor = Color.green;
+    [SerializeField] private Renderer potRenderer;
+    private Color defaultColor = Color.white;
+    private Color highlightColor = Color.yellow;
     private Color fullColor = Color.red;
     private Color cookingColor = Color.cyan;
     private Color cookedColor = Color.blue;
@@ -265,16 +39,15 @@ public class CookingPotBehaviour : MonoBehaviour
 
     void Start()
     {
-        potRenderer = GetComponent<Renderer>();
+        
         ResetPotColor();
 
         //Set ingredient slots UI to disabled. 
         cookingPotInventoryCanvas.SetActive(false);
-        //cookingImageSlot.enabled = false;
-        //cookedImageSlot.enabled = false;
+
         cookingImageSlot.SetActive(false);
         cookedImageSlot.SetActive(false);
-        
+
     }
 
     void Update()
@@ -338,27 +111,54 @@ public class CookingPotBehaviour : MonoBehaviour
         HandleCooking(true);
     }
 
+    
     private void DetermineRecipe()
     {
+        // Check if recipes list is null or empty
+        if (recipes == null || recipes.Count == 0)
+        {
+            Debug.LogError("No recipes defined!");
+            return;
+        }
+
+        // Check if itemsInPot is null or empty
+        if (itemsInPot == null || itemsInPot.Count == 0)
+        {
+            Debug.LogError("No items in pot!");
+            return;
+        }
+
         foreach (Recipe recipe in recipes)
         {
+            // Null check for recipe
+            if (recipe == null || recipe.ingredients == null)
+            {
+                Debug.LogWarning("Skipping null recipe");
+                continue;
+            }
+
             if (MatchRecipe(recipe))
             {
-                CookedFoodData = recipe.result;
-                Debug.Log($"Recipe matched! Created {CookedFoodData.itemName}.");
+                cookedFoodData = recipe.result;
+                Debug.Log($"Recipe matched! Created {cookedFoodData?.itemName ?? "Unknown"}.");
                 return;
             }
         }
 
         // No matching recipe
-        CookedFoodData = defaultJunkFoodData;
+        cookedFoodData = defaultJunkFoodData;
         Debug.Log("No recipe matched. Created junk food.");
     }
 
     private bool MatchRecipe(Recipe recipe)
     {
+        // Additional null checks
+        if (recipe.ingredients == null || recipe.ingredients.Count == 0)
+            return false;
+
         // Create a dictionary of ingredient counts in the pot
         var potIngredientCounts = itemsInPot
+            .Where(item => item?.itemData != null)
             .GroupBy(item => item.itemData.itemName)
             .ToDictionary(g => g.Key, g => g.Count());
 
@@ -385,31 +185,31 @@ public class CookingPotBehaviour : MonoBehaviour
         HandleCooking(false);
     }
 
+    
     public GameObject TakeCooked()
     {
-        if (!isCooked || CookedFoodData == null) return null;
+        if (!isCooked || cookedFoodData == null) return null;
 
         GameObject cookedItem = Instantiate(itemPrefab, transform.position + Vector3.up, Quaternion.identity);
-        ItemInstance itemInstance = cookedItem.GetComponent<ItemInstance>();
+        cookedItem.GetComponent<ItemInstance>().itemData = cookedFoodData;
 
-        if (itemInstance != null)
-        {
-            itemInstance.itemData = CookedFoodData;
-        }
-
-        //Set centre panel with cooking sprite.
-        HandleCooking(true);
-
-        ResetPotState();
+        ResetPotState(); // Reset pot state and UI
         return cookedItem;
     }
 
+
+    
     private void ResetPotState()
     {
         isCooked = false;
-        CookedFoodData = null;
+        isCooking = false;
+        cookedFoodData = null;
+        itemsInPot.Clear();
         ResetPotColor();
+
+        HandleCooking(false); // Reset UI
     }
+
 
     private void ResetPotColor()
     {
@@ -443,34 +243,7 @@ public class CookingPotBehaviour : MonoBehaviour
         }
     }
 
-    //private void AddIngredientToUI(ItemInstance item)
-    //{
-    //    //Set ingredient slots UI to enabled. 
-    //    cookingPotInventoryCanvas.SetActive(true);
-    //    cookingImageSlot.enabled = cookedImageSlot.enabled = false;
-    //    for (int i = 0; i < ingredientImageSlots.Length; i++)
-    //    {
-    //        ingredientImageSlots[i].enabled = true;
-    //    }
 
-    //    //Get the amount of ingredients and subtract 1 to get the ingredientImageSlot index. 
-    //    var slotIndex = itemsInPot.Count - 1;
-    //    //Set the sprite in the slot to the current ingredient sprite - visual marker of the cooking pot inventory. 
-    //    ingredientImageSlots[slotIndex].sprite = item.itemData.itemSprite;
-
-    //    Debug.Log($"Added {item.itemData.itemName} to ingredient list UI.");
-    //}
-
-    //private void HandleCooking(bool cooking)
-    //{
-    //    for (int i = 0; i < ingredientImageSlots.Length; i++)
-    //    {
-    //        ingredientImageSlots[i].enabled = false;
-    //    }
-    //    //Switch between cooking and cooked.
-    //    cookingImageSlot.enabled = cooking;
-    //    cookedImageSlot.enabled = !cooking;
-    //}
 
     private void AddIngredientToUI(ItemInstance item)
     {
@@ -488,16 +261,25 @@ public class CookingPotBehaviour : MonoBehaviour
         Debug.Log($"Added {item.itemData.itemName} to ingredient list UI.");
     }
 
+    
     private void HandleCooking(bool cooking)
     {
-        for (int i = 0; i < ingredientImageSlots.Length; i++)
+        // Clear ingredient slots
+        foreach (var slot in ingredientImageSlots)
         {
-            ingredientImageSlots[i].SetActive(false);
+            var image = slot.GetComponent<Image>();
+            image.sprite = null;
+            slot.SetActive(false);
         }
 
+        // Toggle cooking and cooked slots
         cookingImageSlot.SetActive(cooking);
         cookedImageSlot.SetActive(!cooking);
+
+        // Hide UI if not cooking or cooked
+        cookingPotInventoryCanvas.SetActive(cooking || isCooked);
     }
+
 
 }
 
@@ -507,3 +289,5 @@ public class Recipe
     public List<Item> ingredients;
     public Item result;
 }
+
+

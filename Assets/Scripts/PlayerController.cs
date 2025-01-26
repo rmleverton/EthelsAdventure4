@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     private Cat nearbyCat;
 
+    [SerializeField] SpriteRenderer inventoryItemUI;
+
     private void Start()
     {
         ConfigureInputActions();
@@ -99,42 +101,41 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    
+
     private void HandlePotInteraction()
     {
-        // If holding an item and pot has space
-        if (inventoryItem != null )
-        {
-            ItemInstance itemInstance = inventoryItem.GetComponent<ItemInstance>();
-            string itemName = itemInstance?.itemData?.itemName ?? inventoryItem.name;
-
-            if (nearbyPot.AddItem(inventoryItem))
-            {
-                Debug.Log($"{gameObject.tag} deposited {itemName} into the cooking pot.");
-                inventoryItem = null;
-            }
-            else
-            {
-                Debug.Log($"{gameObject.tag} cannot deposit {itemName}. Pot is full or cannot accept the item.");
-            }
-        }
-        // If no item and pot has cooked food
-        else if (inventoryItem == null)
+        if (inventoryItem == null) // Pick up cooked food
         {
             GameObject cookedFood = nearbyPot.TakeCooked();
             if (cookedFood != null)
             {
-                ItemInstance foodInstance = cookedFood.GetComponent<ItemInstance>();
-                string foodName = foodInstance?.itemData?.itemName ?? cookedFood.name;
-
+                ItemInstance itemInstance = cookedFood.GetComponent<ItemInstance>();
                 inventoryItem = cookedFood;
-                Debug.Log($"{gameObject.tag} picked up {foodName} from the cooking pot.");
+                inventoryItemUI.sprite = itemInstance.itemData.itemSprite;
+
+                Debug.Log($"{gameObject.tag} picked up {itemInstance.itemData.itemName} from the cooking pot.");
             }
             else
             {
-                Debug.Log($"{gameObject.tag} tried to pick up cooked food, but no food is available.");
+                Debug.Log("No cooked food available in the pot.");
+            }
+        }
+        else // Deposit item
+        {
+            if (nearbyPot.AddItem(inventoryItem))
+            {
+                Debug.Log($"{gameObject.tag} deposited {inventoryItem.name} into the cooking pot.");
+                inventoryItem = null;
+                inventoryItemUI.sprite = null;
+            }
+            else
+            {
+                Debug.Log("Cannot deposit item into the pot.");
             }
         }
     }
+
 
     private void HandleCatFeeding()
     {
@@ -142,7 +143,7 @@ public class PlayerController : MonoBehaviour
         if (inventoryItem != null)
         {
             ItemInstance itemInstance = inventoryItem.GetComponent<ItemInstance>();
-            if (itemInstance?.itemData?.itemName.Contains("Cooked") == true)
+            if (itemInstance?.itemData?.disease != null)
             {
                 // Feed the cat
                 nearbyCat.Feed(itemInstance);
@@ -150,6 +151,7 @@ public class PlayerController : MonoBehaviour
                 // Destroy the food
                 Destroy(inventoryItem);
                 inventoryItem = null;
+                inventoryItemUI.sprite = null;
 
                 Debug.Log($"{gameObject.tag} fed the cat with cooked food.");
             }
@@ -174,6 +176,8 @@ public class PlayerController : MonoBehaviour
             {
                 ItemInstance itemInstance = inventoryItem.GetComponent<ItemInstance>();
                 string itemName = itemInstance?.itemData?.itemName ?? inventoryItem.name;
+
+                inventoryItemUI.sprite = itemInstance.itemData.itemSprite;
                 Debug.Log($"{gameObject.tag} picked up {itemName} from the chest.");
             }
             else
@@ -189,44 +193,44 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+
+
     private void HandleDropAction()
     {
+        // If near a cooking pot
         if (nearbyPot != null)
         {
-            // If player has an item and is near the pot, drop player's item into fire
+            // Drop the player's inventory item into the pot fire
             if (inventoryItem != null)
             {
-                ItemInstance itemInstance = inventoryItem.GetComponent<ItemInstance>();
-                string itemName = itemInstance?.itemData?.itemName ?? inventoryItem.name;
-
-                Debug.Log($"{gameObject.tag} dropped {itemName} into the fire and destroyed it.");
+                string itemName = inventoryItem.GetComponent<ItemInstance>()?.itemData?.itemName ?? "unknown item";
+                Debug.Log($"{gameObject.tag} dropped {itemName} into the fire.");
                 Destroy(inventoryItem);
                 inventoryItem = null;
+                inventoryItemUI.sprite = null;
             }
-            // If player's inventory is empty and pot has cooked food, destroy cooked food
+            // Destroy cooked food from the pot if inventory is empty
             else
             {
                 GameObject cookedFood = nearbyPot.TakeCooked();
                 if (cookedFood != null)
                 {
-                    ItemInstance foodInstance = cookedFood.GetComponent<ItemInstance>();
-                    string foodName = foodInstance?.itemData?.itemName ?? cookedFood.name;
-
+                    string foodName = cookedFood.GetComponent<ItemInstance>()?.itemData?.itemName ?? "unknown cooked food";
                     Debug.Log($"{gameObject.tag} destroyed {foodName} from the cooking pot.");
                     Destroy(cookedFood);
                 }
                 else
                 {
-                    Debug.Log($"{gameObject.tag} has no item to drop.");
+                    Debug.Log($"{gameObject.tag} has no item to drop, and no cooked food to destroy.");
                 }
             }
         }
         else
         {
-            Debug.Log("Can't Drop Here Mate");
+            Debug.Log($"{gameObject.tag} can't drop an item here.");
         }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -241,6 +245,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Cat"))
         {
             nearbyCat = other.GetComponent<Cat>();
+            nearbyCat.highlighted = true;
         }
     }
 
@@ -256,6 +261,7 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("Cat"))
         {
+            nearbyCat.highlighted = false;
             nearbyCat = null;
         }
     }

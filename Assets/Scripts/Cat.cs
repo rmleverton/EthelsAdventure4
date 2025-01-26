@@ -22,10 +22,8 @@ public class Cat : MonoBehaviour
     [SerializeField] private SpriteRenderer prescriptionUIImage;
 
     [SerializeField] private Sprite defaultSad;
-    //private void Awake()
-    //{
-    //    Debug.Log($"Cat Awake: {gameObject.activeSelf}");
-    //}
+
+    public bool highlighted;
 
     public enum CatState
     {
@@ -44,12 +42,7 @@ public class Cat : MonoBehaviour
     {
         if (CurrentState == CatState.Hungry)
         {
-            //// Move directly to sleep point
-            //if (sleepPoint != null)
-            //{
-            //    MoveTo(sleepPoint, CatState.MovingToSleep);
-            //    Debug.Log($"Cat {catName} has been fed and is now moving to sleep.");
-            //}
+            
             if(medicine.GetItemCure() == illness)
             {
                 prescriptionUI.SetActive(false);
@@ -68,13 +61,7 @@ public class Cat : MonoBehaviour
 
     public CatState CurrentState { get; private set; } = CatState.Spawning;
 
-    //public void Initialize(string _illness, string _name, Transform point)
-    //{
-    //    illness = _illness;
-    //    catName = _name;
-    //    CurrentState = CatState.Spawning;
-    //    testPoint = point;
-    //}
+    
     public void Initialize(string _illness, string _name, Transform point, Sprite _exImage, Sprite _illImage)
     {
         illness = _illness;
@@ -100,6 +87,14 @@ public class Cat : MonoBehaviour
         if(CurrentState == CatState.Hungry)
         {
             //stuff
+        }
+        if (highlighted)
+        {
+            spriteRenderer.color = Color.yellow;
+        }
+        else
+        {
+            spriteRenderer.color = Color.white;
         }
     }
 
@@ -195,8 +190,7 @@ public class Cat : MonoBehaviour
 
     public void SetWayPoint(Transform point)
     {
-        //wayPoint = point;
-        //Debug.Log("Waypoint set to: " + point.name);
+        
         if (point == null)
         {
             Debug.Log("SetWayPoint received a null Transform.");
@@ -213,8 +207,6 @@ public class Cat : MonoBehaviour
         Debug.Log("Sending Illness");
         return illImage;
     }
-    //public void SetTestPoint(Transform point)
-    //{
-    //    testPoint = point;
-    //}
+
+
 }
