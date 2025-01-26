@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     private InputAction interactAction;
     private InputAction dropAction;
     private InputAction catAction;
+    private InputAction openBookAction;
+    private InputAction pageUpAction;
+    private InputAction pageDownAction;
 
     public Animator anim;
 
@@ -37,10 +40,17 @@ public class PlayerController : MonoBehaviour
         string dropActionName = transform.CompareTag("Player One") ? "DropPlayerOne" : "DropPlayerTwo";
         string catActionName = transform.CompareTag("Player One") ? "CatPlayerOne" : "CatPlayerTwo";
 
+
         moveAction = InputSystem.actions.FindAction(moveActionName);
         interactAction = InputSystem.actions.FindAction(interactActionName);
         dropAction = InputSystem.actions.FindAction(dropActionName);
         catAction = InputSystem.actions.FindAction(catActionName);
+
+        //Handle Medicine Book. 
+        openBookAction = InputSystem.actions.FindAction("OpenBook");
+        pageUpAction = InputSystem.actions.FindAction("PageUp");
+        pageDownAction = InputSystem.actions.FindAction("PageDown");
+
     }
 
     void Update()
@@ -73,6 +83,18 @@ public class PlayerController : MonoBehaviour
         if (catAction?.WasPerformedThisFrame() == true)
         {
             InteractWithCat();
+        }
+        if (openBookAction?.WasPerformedThisFrame() == true)
+        {
+            OpenBook();
+        }
+        if (pageUpAction?.WasPerformedThisFrame() == true)
+        {
+            PageUp();
+        }
+        if (pageDownAction?.WasPerformedThisFrame() == true)
+        {
+            PageDown();
         }
     }
 
@@ -231,6 +253,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OpenBook()
+    {
+
+    }
+
+    private void CloseBook()
+    {
+
+    }
+
+    private void PageUp()
+    {
+
+    }
+
+    private void PageDown()
+    {
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {
