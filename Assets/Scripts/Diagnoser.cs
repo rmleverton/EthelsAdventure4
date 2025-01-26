@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Diagnoser : MonoBehaviour
 {
     [SerializeField] private GameObject uiMenu; // Reference to the UI menu GameObject
     private GameObject _cat;
+    [SerializeField] private Image catImage;
 
     private void Start()
     {
@@ -25,6 +27,8 @@ public class Diagnoser : MonoBehaviour
         if (other.CompareTag("Cat"))
         {
             _cat = other.gameObject;
+            Sprite illImage = _cat.GetComponent<Cat>().GetIllnessImage();
+            catImage.sprite = illImage;
                 
             Debug.Log("Open UI");
             OpenMenu();

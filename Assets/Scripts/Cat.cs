@@ -11,6 +11,10 @@ public class Cat : MonoBehaviour
     [SerializeField] private Transform wayPoint;
     private float speed = 2f;
 
+    private SpriteGroup spriteGroup;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    private Sprite externalImage;
+    private Sprite illImage;
 
     //private void Awake()
     //{
@@ -52,12 +56,16 @@ public class Cat : MonoBehaviour
     //    CurrentState = CatState.Spawning;
     //    testPoint = point;
     //}
-    public void Initialize(string _illness, string _name, Transform point)
+    public void Initialize(string _illness, string _name, Transform point, Sprite _exImage, Sprite _illImage)
     {
         illness = _illness;
         catName = _name;
         CurrentState = CatState.Spawning;
         testPoint = point;
+        //spriteGroup = _spriteGroup;
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer.sprite = _exImage;
+        illImage = _illImage;
 
         gameObject.SetActive(true);
     }
@@ -77,7 +85,28 @@ public class Cat : MonoBehaviour
     private void MoveTowardsTarget()
     {
         float step = speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, targetPoint.position, step);
+        Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPoint.position, step);
+
+        // Calculate the direction of movement
+        Vector3 moveDirection = (targetPoint.position - transform.position).normalized;
+
+        // Rotate only around Y-axis
+        if (moveDirection != Vector3.zero)
+        {
+            float angle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, angle - 90, 0);
+        }
+
+        if(moveDirection.x < 0)
+        {
+            spriteRenderer.flipY = true;
+        }
+        else
+        {
+            spriteRenderer.flipY = false;
+        }
+
+        transform.position = newPosition;
 
         if (Vector3.Distance(transform.position, targetPoint.position) < 0.5f)
         {
@@ -152,6 +181,12 @@ public class Cat : MonoBehaviour
         wayPoint = point;
         Debug.Log($"Waypoint set to: {point.name}");
 
+    }
+
+    public Sprite GetIllnessImage()
+    {
+        Debug.Log("Sending Illness");
+        return illImage;
     }
     //public void SetTestPoint(Transform point)
     //{
