@@ -276,6 +276,8 @@ public class CookingPotBehaviour : MonoBehaviour
         cookingImageSlot.SetActive(cooking);
         cookedImageSlot.SetActive(!cooking);
 
+        cookedImageSlot.GetComponent<Image>().sprite = cookedFoodData.itemSprite;
+
         // Hide UI if not cooking or cooked
         cookingPotInventoryCanvas.SetActive(cooking || isCooked);
     }
