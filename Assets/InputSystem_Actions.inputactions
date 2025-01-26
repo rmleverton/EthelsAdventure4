@@ -40,6 +40,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OpenBook",
+                    "type": "Button",
+                    "id": "982a913f-a2f4-4d41-863c-e58becb97f60",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PageUp",
+                    "type": "Button",
+                    "id": "969edaba-4083-43f2-b306-f58020eb47ef",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PageDown",
+                    "type": "Button",
+                    "id": "b61284fa-af8c-4214-af6d-11322ffd3885",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -128,6 +155,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "CatPlayerOne",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8f245c7-ca2f-4a64-b87b-2488996ab76b",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenBook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "caa195f1-2711-4eb4-a7dc-37e0fef8f44f",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PageUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "58b82daf-c8f7-4726-a47e-30d0b8af38c9",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PageDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
