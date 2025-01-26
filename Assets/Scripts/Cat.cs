@@ -16,6 +16,8 @@ public class Cat : MonoBehaviour
     private Sprite externalImage;
     private Sprite illImage;
 
+    private Sprite prescription;
+
     //private void Awake()
     //{
     //    Debug.Log($"Cat Awake: {gameObject.activeSelf}");
