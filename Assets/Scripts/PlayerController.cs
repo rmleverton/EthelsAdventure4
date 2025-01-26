@@ -17,14 +17,14 @@ public class PlayerController : MonoBehaviour
     private InputAction interactAction;
     private InputAction dropAction;
 
-    private Animator anim;
+    public Animator anim;
 
     private Cat nearbyCat;
 
     private void Start()
     {
         ConfigureInputActions();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void ConfigureInputActions()
@@ -47,11 +47,11 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement()
     {
         Vector2 moveValue = moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
-        transform.position += new Vector3(moveValue.x, 0, moveValue.y) * speed * Time.deltaTime;
+        transform.position += new Vector3((float)moveValue.x, 0, (float)moveValue.y) * speed * Time.deltaTime;
 
 
-        //anim.SetFloat("speedX", moveValue.x);
-        //anim.SetFloat("speedY", moveValue.y);
+        anim.SetFloat("speedX", moveValue.x);
+        anim.SetFloat("speedY", moveValue.y);
     }
 
     private void HandleInteractions()
