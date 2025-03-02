@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Salami
   m_EditorClassIdentifier: 
   itemName: Salami
-  itemSprite: {fileID: 21300000, guid: 3e43f24d3d6274e7a9f002cd6d9a1a20, type: 3}
+  itemSprite: {fileID: 21300000, guid: e83e70b94413143ec9a742ab3ebf0018, type: 3}
   disease: 

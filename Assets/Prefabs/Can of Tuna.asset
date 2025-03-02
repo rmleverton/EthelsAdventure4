@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Can of Tuna
   m_EditorClassIdentifier: 
   itemName: Can of Tuna
-  itemSprite: {fileID: 21300000, guid: 3e43f24d3d6274e7a9f002cd6d9a1a20, type: 3}
+  itemSprite: {fileID: 21300000, guid: 3aa03f04620294010ac5b45cbd21499c, type: 3}
   disease: 

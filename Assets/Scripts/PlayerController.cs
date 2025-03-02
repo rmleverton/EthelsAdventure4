@@ -165,6 +165,34 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    //private void HandleCatFeeding()
+    //{
+    //    // Check if player has cooked food
+    //    if (inventoryItem != null)
+    //    {
+    //        ItemInstance itemInstance = inventoryItem.GetComponent<ItemInstance>();
+    //        if (itemInstance?.itemData?.disease != null)
+    //        {
+    //            // Feed the cat
+    //            nearbyCat.Feed(itemInstance);
+
+    //            // Destroy the food
+    //            Destroy(inventoryItem);
+    //            inventoryItem = null;
+    //            inventoryItemUI.sprite = null;
+
+    //            Debug.Log($"{gameObject.tag} fed the cat with cooked food.");
+    //        }
+    //        else
+    //        {
+    //            Debug.Log($"{gameObject.tag} can only feed cats with cooked food.");
+    //        }
+    //    }
+    //    else
+    //    {
+    //        Debug.Log($"{gameObject.tag} has no food to feed the cat.");
+    //    }
+    //}
     private void HandleCatFeeding()
     {
         // Check if player has cooked food
@@ -274,7 +302,7 @@ public class PlayerController : MonoBehaviour
     {
         if (medicineUI.activeSelf)
         {
-            medicinePanelsIndex = (medicinePanelsIndex + 1) % 3;
+            medicinePanelsIndex = (medicinePanelsIndex + 1) % 2;
             for (int i = 0; i < medicinePanels.Length; i++)
             {
                 if (i == medicinePanelsIndex)
@@ -294,7 +322,7 @@ public class PlayerController : MonoBehaviour
     {
         if (medicineUI.activeSelf)
         {
-            medicinePanelsIndex = (medicinePanelsIndex - 1 + 3) % 3;
+            medicinePanelsIndex = (medicinePanelsIndex - 1 + 2) % 2;
             for (int i = 0; i < medicinePanels.Length; i++)
             {
                 if (i == medicinePanelsIndex)

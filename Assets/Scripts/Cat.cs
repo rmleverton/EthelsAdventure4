@@ -1,40 +1,293 @@
+//using UnityEngine;
+//using UnityEngine.SceneManagement;
+
+//public class Cat : MonoBehaviour
+//{
+//    [SerializeField] private string illness;
+//    [SerializeField] private string diagnosis;
+//    [SerializeField] private string catName;
+//    //[SerializeField] private Transform targetPoint;
+//    [SerializeField] private Transform testPoint;
+//    [SerializeField] private Transform sleepPoint;
+//    [SerializeField] private Transform wayPoint;
+//    private float speed = 2f;
+
+//    [SerializeField] private SpriteRenderer spriteRenderer;
+//    private Sprite externalImage;
+//    private Sprite illImage;
+
+//    [SerializeField] private GameObject prescriptionUI;
+//    [SerializeField] private SpriteRenderer prescriptionUIImage;
+//    [SerializeField] private Sprite defaultSad;
+
+//    public bool highlighted;
+//    public bool finalCat;
+
+//    public Vector3 waitPoint { get; private set; } // Changed from Transform to Vector3
+//    [SerializeField] private Vector3 targetPosition; // Changed from Transform
+
+//    public enum CatState
+//    {
+//        Spawning,
+//        MovingToTest,
+//        WaitingForDiagnosis,
+//        MovingToWaypoint,
+//        MovingToSleep,
+//        Sleeping,
+//        Hungry,
+//        MovingToWait,  // New state
+//        Waiting        // New state
+//    }
+
+//    public CatState CurrentState { get; private set; } = CatState.Spawning;
+
+//    public void Initialize(string _illness, string _name, Transform _testPoint, Sprite _exImage, Sprite _illImage, Vector3 _waitPoint)
+//    {
+//        illness = _illness;
+//        catName = _name;
+//        testPoint = _testPoint;
+//        spriteRenderer.sprite = _exImage;
+//        illImage = _illImage;
+//        waitPoint = _waitPoint;
+//        prescriptionUI.SetActive(false);
+//        gameObject.SetActive(true);
+//    }
+
+//    public void SetDiagnosis(string _diagnosis, Sprite _prescription)
+//    {
+//        diagnosis = _diagnosis;
+//        prescriptionUIImage.sprite = _prescription;
+//        prescriptionUI.SetActive(true);
+
+//        if (wayPoint != null)
+//        {
+//            MoveTo(wayPoint.position, CatState.MovingToWaypoint);
+//        }
+//        else
+//        {
+//            MoveTo(sleepPoint.position, CatState.MovingToSleep);
+//        }
+//    }
+
+//    public void MoveTo(Vector3 target, CatState newState)
+//    {
+//        Debug.Log("Moving to: " + target);
+//        //targetPoint.position = target;
+//        targetPosition = target;
+//        CurrentState = newState;
+//    }
+
+//    public void SetSleepPoint(Transform point) => sleepPoint = point;
+//    public void SetWayPoint(Transform point) => wayPoint = point;
+//    public Sprite GetIllnessImage() => illImage;
+
+//    public bool CanBeFed => CurrentState == CatState.Hungry;
+
+//    public void Feed(ItemInstance medicine)
+//    {
+//        if (CurrentState == CatState.Hungry)
+//        {
+//            if (medicine.GetItemCure() == illness)
+//            {
+//                prescriptionUI.SetActive(false);
+//                CurrentState = CatState.Sleeping;
+//            }
+//            else
+//            {
+//                prescriptionUIImage.sprite = defaultSad;
+//                CurrentState = CatState.Sleeping;
+//            }
+
+//            if (finalCat)
+//            {
+//                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+//            }
+//        }
+//    }
+
+//    private void Update()
+//    {
+//        if (targetPosition != null)
+//        {
+//            MoveTowardsTarget();
+//        }
+
+//        if (highlighted)
+//        {
+//            spriteRenderer.color = Color.yellow;
+//        }
+//        else
+//        {
+//            spriteRenderer.color = Color.white;
+//        }
+//    }
+
+//    private void MoveTowardsTarget()
+//    {
+//        float step = speed * Time.deltaTime;
+//        //transform.position = Vector3.MoveTowards(transform.position, targetPoint.position, step);
+//        transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
+
+//        // Calculate the direction of movement
+//        Vector3 moveDirection = (targetPosition - transform.position).normalized;
+
+//        // Rotate only around Y-axis
+//        if (moveDirection != Vector3.zero)
+//        {
+//            float angle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
+//            spriteRenderer.transform.rotation = Quaternion.Euler(75, angle - 90, 0);
+//        }
+
+//        if (moveDirection.x < 0)
+//        {
+//            spriteRenderer.flipY = true;
+//        }
+//        else
+//        {
+//            spriteRenderer.flipY = false;
+//        }
+
+
+//        if (Vector3.Distance(transform.position, targetPosition) < 0.5f)
+//        {
+//            OnReachedTarget();
+//        }
+//    }
+
+//    //private void OnReachedTarget()
+//    //{
+//    //    switch (CurrentState)
+//    //    {
+//    //        case CatState.MovingToTest:
+//    //            CurrentState = CatState.WaitingForDiagnosis;
+//    //            break;
+
+//    //        case CatState.MovingToWaypoint:
+//    //            MoveTo(sleepPoint.position, CatState.MovingToSleep);
+//    //            break;
+
+//    //        case CatState.MovingToSleep:
+//    //            CurrentState = CatState.Hungry;
+//    //            break;
+//    //    }
+//    //}
+//    private void OnReachedTarget()
+//    {
+//        switch (CurrentState)
+//        {
+//            case CatState.MovingToTest:
+//                CurrentState = CatState.WaitingForDiagnosis;
+//                break;
+
+//            case CatState.MovingToWait:
+//                CurrentState = CatState.Waiting;
+//                //targetPosition = null;
+//                break;
+
+//            case CatState.MovingToWaypoint:
+//                MoveTo(sleepPoint.position, CatState.MovingToSleep);
+//                break;
+
+//            case CatState.MovingToSleep:
+//                CurrentState = CatState.Hungry;
+//                break;
+//        }
+//    }
+//}
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Cat : MonoBehaviour
 {
     [SerializeField] private string illness;
     [SerializeField] private string diagnosis;
     [SerializeField] private string catName;
-    [SerializeField] private Transform targetPoint;
     [SerializeField] private Transform testPoint;
     [SerializeField] private Transform sleepPoint;
     [SerializeField] private Transform wayPoint;
     private float speed = 2f;
 
-    private SpriteGroup spriteGroup;
     [SerializeField] private SpriteRenderer spriteRenderer;
     private Sprite externalImage;
     private Sprite illImage;
 
-    private Sprite prescription;
     [SerializeField] private GameObject prescriptionUI;
     [SerializeField] private SpriteRenderer prescriptionUIImage;
-
     [SerializeField] private Sprite defaultSad;
 
     public bool highlighted;
+    public bool finalCat;
+
+    private Vector3 waitPoint;
+    private Vector3 targetPosition;
+
+    private CatManager catManager;
 
     public enum CatState
     {
         Spawning,
+        MovingToWait,
+        Waiting,
         MovingToTest,
         WaitingForDiagnosis,
         MovingToWaypoint,
         MovingToSleep,
-        Sleeping,
-        Hungry
+        Hungry,
+        Sleeping
     }
+
+    public CatState CurrentState { get; private set; } = CatState.Spawning;
+
+    public void Initialize(CatManager manager, string _illness, string _name, Transform _testPoint, Sprite _exImage, Sprite _illImage, Vector3 _waitPoint)
+    {
+        catManager = manager;
+        illness = _illness;
+        catName = _name;
+        testPoint = _testPoint;
+        externalImage = _exImage;
+        illImage = _illImage;
+        waitPoint = _waitPoint;
+        spriteRenderer.sprite = externalImage;
+        prescriptionUI.SetActive(false);
+        gameObject.SetActive(true);
+
+        // Start moving to wait point
+        MoveTo(waitPoint, CatState.MovingToWait);
+    }
+
+    public void SetDiagnosis(string _diagnosis, Sprite _prescription)
+    {
+        diagnosis = _diagnosis;
+        prescriptionUIImage.sprite = _prescription;
+        prescriptionUI.SetActive(true);
+
+        // Notify CatManager this cat is leaving the test point
+        catManager.CatLeftTestPoint();
+
+        if (wayPoint != null)
+        {
+            MoveTo(wayPoint.position, CatState.MovingToWaypoint);
+        }
+        else
+        {
+            MoveTo(sleepPoint.position, CatState.MovingToSleep);
+        }
+    }
+
+    public void MoveTo(Vector3 target, CatState newState)
+    {
+        targetPosition = target;
+        CurrentState = newState;
+    }
+
+    public void MoveToTestPoint()
+    {
+        MoveTo(testPoint.position, CatState.MovingToTest);
+    }
+
+    public void SetSleepPoint(Transform point) => sleepPoint = point;
+    public void SetWayPoint(Transform point) => wayPoint = point;
+    public Sprite GetIllnessImage() => illImage;
 
     public bool CanBeFed => CurrentState == CatState.Hungry;
 
@@ -42,8 +295,7 @@ public class Cat : MonoBehaviour
     {
         if (CurrentState == CatState.Hungry)
         {
-            
-            if(medicine.GetItemCure() == illness)
+            if (medicine.GetItemCure() == illness)
             {
                 prescriptionUI.SetActive(false);
                 CurrentState = CatState.Sleeping;
@@ -53,78 +305,42 @@ public class Cat : MonoBehaviour
                 prescriptionUIImage.sprite = defaultSad;
                 CurrentState = CatState.Sleeping;
             }
-            
+
+            if (finalCat)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
         }
-
-
-    }
-
-    public CatState CurrentState { get; private set; } = CatState.Spawning;
-
-    
-    public void Initialize(string _illness, string _name, Transform point, Sprite _exImage, Sprite _illImage)
-    {
-        illness = _illness;
-        catName = _name;
-        CurrentState = CatState.Spawning;
-        testPoint = point;
-        //spriteGroup = _spriteGroup;
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        spriteRenderer.sprite = _exImage;
-        illImage = _illImage;
-
-        prescriptionUI.SetActive(false);
-
-        gameObject.SetActive(true);
     }
 
     private void Update()
     {
-        if (targetPoint != null)
+        if (CurrentState == CatState.MovingToWait ||
+            CurrentState == CatState.MovingToTest ||
+            CurrentState == CatState.MovingToWaypoint ||
+            CurrentState == CatState.MovingToSleep)
         {
             MoveTowardsTarget();
         }
-        if(CurrentState == CatState.Hungry)
-        {
-            //stuff
-        }
-        if (highlighted)
-        {
-            spriteRenderer.color = Color.yellow;
-        }
-        else
-        {
-            spriteRenderer.color = Color.white;
-        }
+
+        spriteRenderer.color = highlighted ? Color.yellow : Color.white;
     }
 
     private void MoveTowardsTarget()
     {
         float step = speed * Time.deltaTime;
-        Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPoint.position, step);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
 
-        // Calculate the direction of movement
-        Vector3 moveDirection = (targetPoint.position - transform.position).normalized;
-
-        // Rotate only around Y-axis
+        Vector3 moveDirection = (targetPosition - transform.position).normalized;
         if (moveDirection != Vector3.zero)
         {
             float angle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
             spriteRenderer.transform.rotation = Quaternion.Euler(75, angle - 90, 0);
         }
 
-        if(moveDirection.x < 0)
-        {
-            spriteRenderer.flipY = true;
-        }
-        else
-        {
-            spriteRenderer.flipY = false;
-        }
+        spriteRenderer.flipY = moveDirection.x < 0;
 
-        transform.position = newPosition;
-
-        if (Vector3.Distance(transform.position, targetPoint.position) < 0.5f)
+        if (Vector3.Distance(transform.position, targetPosition) < 0.5f)
         {
             OnReachedTarget();
         }
@@ -132,81 +348,24 @@ public class Cat : MonoBehaviour
 
     private void OnReachedTarget()
     {
-        if (CurrentState == CatState.MovingToWaypoint && wayPoint != null)
+        switch (CurrentState)
         {
-            // After reaching waypoint, set target to sleep point
-            wayPoint = null;
-            targetPoint = sleepPoint;
-            CurrentState = CatState.MovingToSleep;
-        }
-        else
-        {
-            targetPoint = null;
+            case CatState.MovingToWait:
+                CurrentState = CatState.Waiting;
+                catManager.AddCatToQueue(this);
+                break;
 
-            switch (CurrentState)
-            {
-                case CatState.MovingToTest:
-                    transform.position = testPoint.position;
-                    CurrentState = CatState.WaitingForDiagnosis;
-                    break;
+            case CatState.MovingToTest:
+                CurrentState = CatState.WaitingForDiagnosis;
+                break;
 
-                case CatState.MovingToSleep:
-                    transform.position = sleepPoint.position;
-                    CurrentState = CatState.Hungry;
-                    break;
-            }
+            case CatState.MovingToWaypoint:
+                MoveTo(sleepPoint.position, CatState.MovingToSleep);
+                break;
+
+            case CatState.MovingToSleep:
+                CurrentState = CatState.Hungry;
+                break;
         }
     }
-
-    public void MoveTo(Transform target, CatState newState)
-    {
-        targetPoint = target;
-        CurrentState = newState;
-    }
-
-    public void SetDiagnosis(string _diagnosis, Sprite _prescription)
-    {
-        diagnosis = _diagnosis;
-        prescription = _prescription;
-
-        prescriptionUIImage.sprite = prescription;
-        prescriptionUI.SetActive(true);
-
-        // Check if a waypoint exists
-        if (wayPoint != null)
-        {
-            MoveTo(wayPoint, CatState.MovingToWaypoint);
-        }
-        else
-        {
-            MoveTo(sleepPoint, CatState.MovingToSleep);
-        }
-    }
-
-    public void SetSleepPoint(Transform point)
-    {
-        sleepPoint = point;
-    }
-
-    public void SetWayPoint(Transform point)
-    {
-        
-        if (point == null)
-        {
-            Debug.Log("SetWayPoint received a null Transform.");
-            //return;
-        }
-
-        wayPoint = point;
-        Debug.Log($"Waypoint set to: {point.name}");
-
-    }
-
-    public Sprite GetIllnessImage()
-    {
-        Debug.Log("Sending Illness");
-        return illImage;
-    }
-
-
 }

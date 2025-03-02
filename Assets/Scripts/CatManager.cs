@@ -1,4 +1,210 @@
+//using UnityEngine;
+//using System.Collections.Generic;
+//using System.Collections;
+
+//public class CatManager : MonoBehaviour
+//{
+//    [Header("Cat Configuration")]
+//    [SerializeField] private GameObject catPrefab;
+//    [SerializeField] private Transform spawnPoint;
+//    [SerializeField] private Transform testPoint;
+//    [SerializeField] private Transform[] sleepPoints;
+//    [SerializeField] private string[] illnesses;
+//    [SerializeField] private string[] names;
+//    [SerializeField] private SpriteGroup[] spriteGroups;
+
+//    [Header("Spawn Settings")]
+//    [SerializeField] private float spawnInterval = 5f;
+//    private float spawnTimer = 0;
+
+//    private bool[] occupiedSleepPoints;
+//    private List<Cat> cats = new List<Cat>();
+//    [SerializeField] private Queue<Cat> waitingCats = new Queue<Cat>();
+
+//    private void Start()
+//    {
+//        occupiedSleepPoints = new bool[sleepPoints.Length];
+
+//    }
+
+//    private void Update()
+//    {
+//        if (spawnTimer < spawnInterval)
+//        {
+//            spawnTimer += Time.deltaTime;
+
+//            if (spawnTimer >= spawnInterval)
+//            {
+//                StartCoroutine(SpawnCatsRoutine());
+//            }
+//        }
+
+//    }
+//    private IEnumerator SpawnCatsRoutine()
+//    {
+//        while (true)
+//        {
+//            SpawnCat();
+//            yield return new WaitForSeconds(spawnInterval);
+//        }
+//    }
+
+//    //private void SpawnCat()
+//    //{
+//    //    GameObject newCatObj = Instantiate(catPrefab, spawnPoint.position, Quaternion.identity, transform);
+//    //    Cat newCat = newCatObj.GetComponent<Cat>();
+
+//    //    string randomIllness = illnesses[Random.Range(0, illnesses.Length)];
+//    //    string randomName = names[Random.Range(0, names.Length)];
+//    //    SpriteGroup randomSpriteGroup = spriteGroups[Random.Range(0, spriteGroups.Length)];
+//    //    Sprite externalImage = randomSpriteGroup.sprites[0];
+//    //    Sprite illnessImage = AssignSymptoms(randomSpriteGroup.sprites, randomIllness);
+//    //    Vector3 targetpoint = new Vector3(Random.Range(-6.5f, 6.5f), 0.55f, Random.Range(-2.5f, 2.5f));
+
+//    //    newCat.Initialize(randomIllness, randomName, testPoint, externalImage, illnessImage, targetpoint);
+//    //    AssignSleepPoint(newCat);
+//    //    AddCatToWaitingList(newCat);
+//    //    cats.Add(newCat);
+
+//    //}
+
+//    //public void AddCatToWaitingList(Cat cat)
+//    //{
+//    //    waitingCats.Enqueue(cat);
+//    //    Debug.Log("waitingCats: " + waitingCats.Count);
+//    //    if (waitingCats.Count == 1)
+//    //    {
+//    //        Debug.Log("waitingCats: " + waitingCats.Count);
+//    //        cat.MoveTo(testPoint.position, Cat.CatState.MovingToTest);
+//    //    }
+//    //    else
+//    //    {
+//    //        cat.MoveTo(randPoint, Cat.CatState.MovingToTest);
+//    //    }
+//    //}
+//    // Modified spawning and queue management
+//    private void SpawnCat()
+//    {
+//        GameObject newCatObj = Instantiate(catPrefab, spawnPoint.position, Quaternion.identity, transform);
+//        Cat newCat = newCatObj.GetComponent<Cat>();
+
+//        string randomIllness = illnesses[Random.Range(0, illnesses.Length)];
+//        string randomName = names[Random.Range(0, names.Length)];
+//        SpriteGroup randomSpriteGroup = spriteGroups[Random.Range(0, spriteGroups.Length)];
+//        Sprite externalImage = randomSpriteGroup.sprites[0];
+//        Sprite illnessImage = AssignSymptoms(randomSpriteGroup.sprites, randomIllness);
+//        //Create specific wait point for this cat
+
+//        Vector3 targetpoint = new Vector3(Random.Range(-6.5f, -2.0f), 0.55f, Random.Range(-2.5f, 2.5f));
+
+//        newCat.Initialize(randomIllness, randomName, testPoint, externalImage, illnessImage, targetpoint);
+//        AssignSleepPoint(newCat);
+//        //AddCatToWaitingList(newCat);
+//        cats.Add(newCat);
+//    }
+
+//    //public void AddCatToWaitingList(Cat cat)
+//    //{
+//    //    waitingCats.Enqueue(cat);
+
+//    //    if (waitingCats.Count == 1)
+//    //    {
+//    //        // First cat goes directly to test point
+//    //        cat.MoveTo(testPoint.position, Cat.CatState.MovingToTest);
+//    //    }
+//    //    else
+//    //    {
+//    //        // Subsequent cats go to their waiting positions
+//    //        cat.MoveTo(cat.waitPoint, Cat.CatState.MovingToWait);
+//    //    }
+//    //}
+//    public void AddCatToWaitingList(Cat cat)
+//    {
+//        waitingCats.Enqueue(cat);
+
+//        if (waitingCats.Count == 1)
+//        {
+//            // Use testPoint's position directly
+//            cat.MoveTo(testPoint.position, Cat.CatState.MovingToTest);
+//        }
+//        else
+//        {
+//            // Use the pre-defined wait point vector
+//            cat.MoveTo(cat.waitPoint, Cat.CatState.MovingToWait);
+//        }
+//    }
+
+//    // Call this when the current cat is diagnosed to move next cat
+//    public void ProcessNextCat()
+//    {
+//        if (waitingCats.Count > 0)
+//        {
+//            Cat nextCat = waitingCats.Dequeue();
+//            nextCat.MoveTo(testPoint.position, Cat.CatState.MovingToTest);
+
+//            //// Update positions of remaining waiting cats
+//            //foreach (Cat waitingCat in waitingCats)
+//            //{
+//            //    if (waitingCat.CurrentState == Cat.CatState.Waiting)
+//            //    {
+//            //        // Move waiting cats forward in the queue if needed
+//            //    }
+//            //}
+//        }
+//    }
+
+//    public Cat GetNextCatForDiagnosis()
+//    {
+//        if (waitingCats.Count > 0)
+//        {
+//            return waitingCats.Dequeue();
+//        }
+//        return null;
+//    }
+
+//    private Sprite AssignSymptoms(Sprite[] spriteGroup, string illness)
+//    {
+//        for (int i = 1; i < spriteGroup.Length; i++)
+//        {
+//            if (spriteGroup[i].name == illness)
+//            {
+//                return spriteGroup[i];
+//            }
+//        }
+//        return null;
+//    }
+
+//    private bool AssignSleepPoint(Cat cat)
+//    {
+//        for (int i = 0; i < sleepPoints.Length; i++)
+//        {
+//            if (!occupiedSleepPoints[i])
+//            {
+//                occupiedSleepPoints[i] = true;
+//                cat.SetSleepPoint(sleepPoints[i]);
+
+//                if (i == sleepPoints.Length - 1)
+//                {
+//                    cat.finalCat = true;
+//                }
+
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//}
+
+//[System.Serializable]
+//public class SpriteGroup
+//{
+//    public string groupName;
+//    public Sprite[] sprites;
+//}
+
 using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 public class CatManager : MonoBehaviour
 {
@@ -6,44 +212,36 @@ public class CatManager : MonoBehaviour
     [SerializeField] private GameObject catPrefab;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform testPoint;
-    [SerializeField] private Transform wayPointN;
-    [SerializeField] private Transform wayPointS;
     [SerializeField] private Transform[] sleepPoints;
     [SerializeField] private string[] illnesses;
     [SerializeField] private string[] names;
     [SerializeField] private SpriteGroup[] spriteGroups;
 
-    private bool[] occupiedSleepPoints;
-
     [Header("Spawn Settings")]
     [SerializeField] private float spawnInterval = 5f;
-    private float spawnTimer;
+
+    private bool[] occupiedSleepPoints;
+    private List<Cat> cats = new List<Cat>();
+    private Queue<Cat> waitingCats = new Queue<Cat>();
+    private Cat currentCatAtTest;
 
     private void Start()
     {
         occupiedSleepPoints = new bool[sleepPoints.Length];
-        SpawnCat();
+        StartCoroutine(SpawnCatsRoutine());
     }
 
-    private void Update()
+    private IEnumerator SpawnCatsRoutine()
     {
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer >= spawnInterval)
+        while (true)
         {
             SpawnCat();
-            spawnTimer = 0f;
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 
     private void SpawnCat()
     {
-        
-        if (catPrefab == null || illnesses.Length == 0 || names.Length == 0 || spriteGroups.Length == 0)
-        {
-            Debug.LogWarning("CatManager is not properly configured.");
-            return;
-        }
-
         GameObject newCatObj = Instantiate(catPrefab, spawnPoint.position, Quaternion.identity, transform);
         Cat newCat = newCatObj.GetComponent<Cat>();
 
@@ -52,96 +250,60 @@ public class CatManager : MonoBehaviour
         SpriteGroup randomSpriteGroup = spriteGroups[Random.Range(0, spriteGroups.Length)];
         Sprite externalImage = randomSpriteGroup.sprites[0];
         Sprite illnessImage = AssignSymptoms(randomSpriteGroup.sprites, randomIllness);
+        Vector3 waitPoint = new Vector3(Random.Range(-6.5f, -2.0f), 0.55f, Random.Range(-2.5f, 2.5f));
 
-        newCat.Initialize(randomIllness, randomName, testPoint, externalImage, illnessImage);
-        //AssignSymptoms(newCatObj, randomSpriteGroup.sprites, randomIllness);
+        newCat.Initialize(this, randomIllness, randomName, testPoint, externalImage, illnessImage, waitPoint);
         AssignSleepPoint(newCat);
-
-        newCat.MoveTo(testPoint, Cat.CatState.MovingToTest);
-
-        Debug.Log($"Spawned cat '{randomName}' with illness '{randomIllness}'.");
+        cats.Add(newCat);
     }
 
-    private Sprite AssignSymptoms( Sprite[] spriteGroup, string illness)
+    public void AddCatToQueue(Cat cat)
     {
-        if (spriteGroup == null || spriteGroup.Length == 0)
-        {
-            Debug.LogWarning("Sprite group is empty or not assigned.");
-            return null;
-        }
+        waitingCats.Enqueue(cat);
+        TryProcessNextCat();
+    }
 
-        if (illness == "Mange" && spriteGroup.Length > 1)
-            return spriteGroup[1];
-        else if (illness == "Catatonia" && spriteGroup.Length > 2)
-            return spriteGroup[2];
-        else if (illness == "Crestfeline" && spriteGroup.Length > 3)
-            return spriteGroup[3];
-        else if (illness == "Dysentery" && spriteGroup.Length > 4)
-            return spriteGroup[4];
-        else if (illness == "Mad Cat Disease" && spriteGroup.Length > 5)
-            return spriteGroup[5];
-        else if (illness == "Feline Flu" && spriteGroup.Length > 6)
-            return spriteGroup[6];
-        else if (illness == "Catnip Withdrawal" && spriteGroup.Length > 7)
-            return spriteGroup[7];
-        else if (illness == "Radiation Sickness" && spriteGroup.Length > 8)
-            return spriteGroup[8];
-        else if (illness == "Wasteland Parasites" && spriteGroup.Length > 9)
-            return spriteGroup[9];
-        else
+    public void CatLeftTestPoint()
+    {
+        currentCatAtTest = null;
+        TryProcessNextCat();
+    }
+
+    private void TryProcessNextCat()
+    {
+        if (currentCatAtTest == null && waitingCats.Count > 0)
         {
-            return null;
+            currentCatAtTest = waitingCats.Dequeue();
+            currentCatAtTest.MoveToTestPoint();
         }
     }
 
-    public bool AssignSleepPoint(Cat cat)
+    private Sprite AssignSymptoms(Sprite[] spriteGroup, string illness)
+    {
+        for (int i = 1; i < spriteGroup.Length; i++)
+        {
+            if (spriteGroup[i].name == illness)
+                return spriteGroup[i];
+        }
+        return null;
+    }
+
+    private bool AssignSleepPoint(Cat cat)
     {
         for (int i = 0; i < sleepPoints.Length; i++)
         {
-            
-
             if (!occupiedSleepPoints[i])
             {
                 occupiedSleepPoints[i] = true;
-                Transform selectedSleepPoint = sleepPoints[i];
+                cat.SetSleepPoint(sleepPoints[i]);
 
-                // Calculate distances
-                float distanceToSleepPoint = Vector3.Distance(testPoint.position, selectedSleepPoint.position);
-                float distanceToWaypointN = Vector3.Distance(testPoint.position, wayPointN.position);
-                float distanceToWaypointS = Vector3.Distance(testPoint.position, wayPointS.position);
-
-                // Determine closest waypoint
-                Transform closestWaypoint = null;
-                if (distanceToWaypointN < distanceToSleepPoint || distanceToWaypointS < distanceToSleepPoint)
-                {
-                    closestWaypoint = (distanceToWaypointN <= distanceToWaypointS) ? wayPointN : wayPointS;
-                    cat.SetWayPoint(closestWaypoint); // Assign closest waypoint if found
-
-                }
-
-
-                // Set waypoint and sleep point for the cat
-                cat.SetSleepPoint(selectedSleepPoint);
+                if (i == sleepPoints.Length - 1)
+                    cat.finalCat = true;
 
                 return true;
             }
-        
-    }
-
-        Debug.LogWarning("No available sleep points for the cat.");
-        return false;
-    }
-
-    public void FreeSleepPoint(Transform sleepPoint)
-    {
-        for (int i = 0; i < sleepPoints.Length; i++)
-        {
-            if (sleepPoints[i] == sleepPoint)
-            {
-                occupiedSleepPoints[i] = false;
-                break;
-            }
         }
+        return false;
     }
 }
 

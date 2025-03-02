@@ -196,18 +196,29 @@ public class CookingPotBehaviour : MonoBehaviour
         ResetPotState(); // Reset pot state and UI
         return cookedItem;
     }
+    //public Item TakeCooked()
+    //{
+    //    if (!isCooked || cookedFoodData == null) return null;
+
+    //    GameObject cookedItem = Instantiate(itemPrefab, transform.position + Vector3.up, Quaternion.identity);
+    //    cookedItem.GetComponent<ItemInstance>().itemData = cookedFoodData;
+
+    //    ResetPotState(); // Reset pot state and UI
+    //    return cookedItem;
+    //}
 
 
-    
+
     private void ResetPotState()
     {
         isCooked = false;
         isCooking = false;
-        cookedFoodData = null;
+        
         itemsInPot.Clear();
         ResetPotColor();
 
         HandleCooking(false); // Reset UI
+        cookedFoodData = null;
     }
 
 

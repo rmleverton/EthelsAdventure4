@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: De-Sand-Wormer
   m_EditorClassIdentifier: 
   itemName: De-Sand-Wormer
-  itemSprite: {fileID: 21300000, guid: 9ff582d5aa8fb4ffd808ececed47b9d5, type: 3}
+  itemSprite: {fileID: 21300000, guid: 12b5b7c5f40f0407f83ee3931d48fa47, type: 3}
   disease: Wasteland Parasites

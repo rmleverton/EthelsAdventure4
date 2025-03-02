@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Wild West Stew
   m_EditorClassIdentifier: 
   itemName: Wild West Stew
-  itemSprite: {fileID: 21300000, guid: 9ff582d5aa8fb4ffd808ececed47b9d5, type: 3}
+  itemSprite: {fileID: 21300000, guid: ee1583d4569e847bf951dbbf3997c505, type: 3}
   disease: Dysentery

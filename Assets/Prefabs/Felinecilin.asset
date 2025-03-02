@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Felinecilin
   m_EditorClassIdentifier: 
   itemName: Felinecilin
-  itemSprite: {fileID: 21300000, guid: 9ff582d5aa8fb4ffd808ececed47b9d5, type: 3}
+  itemSprite: {fileID: 21300000, guid: b6ba61615002d41ebaaaff555e48e57e, type: 3}
   disease: Feline Flu
